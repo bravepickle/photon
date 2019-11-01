@@ -90,9 +90,11 @@ class SiteController extends AbstractController
         ksort($slides);
         sort($files);
 
+        $breadcrumbs = $this->buildBreadcrumbs($pubFolder);
+
         return $this->render('site/index.html.twig', [
-            'current' => $pubFolder,
             'path' => $path,
+            'breadcrumbs' => $breadcrumbs,
             'files' => $files,
             'directories' => $directories,
             'skipped' => $skipped,
@@ -100,5 +102,43 @@ class SiteController extends AbstractController
             'depth' => $depth,
             'deletable' => $path !== '',
         ]);
+    }
+
+    /**
+     * @param string $pubFolder
+     * @return array
+     */
+    protected function buildBreadcrumbs(string $pubFolder): array
+    {
+        $breadcrumbs = [];
+        $pathCrumbs = [];
+        $parts = explode('/', ltrim($pubFolder, '/'));
+        $first = 0;
+        $last = count($parts) - 1;
+
+        foreach ($parts as $key => $part) {
+            if ($key === $first) {
+                $breadcrumb = [
+                    'url' => $this->generateUrl('site'),
+                    'title' => $part,
+                ];
+            } elseif ($key === $last) {
+                $breadcrumb = [
+                    'url' => null,
+                    'title' => $part,
+                ];
+            } else {
+                $pathCrumbs[] = $part;
+
+                $breadcrumb = [
+                    'url' => $this->generateUrl('site', ['path' => implode('/', $pathCrumbs)]),
+                    'title' => $part,
+                ];
+            }
+
+            $breadcrumbs[] = $breadcrumb;
+        }
+
+        return $breadcrumbs;
     }
 }

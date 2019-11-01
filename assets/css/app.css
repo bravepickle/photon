@@ -104,3 +104,99 @@ body {
         /*max-width: 50rem;*/
     /*}*/
 /*}*/
+
+/*** Navigation ***/
+
+/* Style the list */
+.content .breadcrumbs ul {
+    padding: 0.7rem 1rem;
+    list-style: none;
+    background-color: #4c4c4c;
+}
+
+/* Display list items side by side */
+.content .breadcrumbs ul li {
+    display: inline;
+    font-size: 1.3rem;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+.content .breadcrumbs ul li+li:before {
+    padding: 8px;
+    color: #F0FFF0;
+    content: "/\00a0";
+}
+
+/* Add a color to all links inside the list */
+.content .breadcrumbs ul li a {
+    color: #0275d8;
+    text-decoration: none;
+}
+
+/* Add a color on mouse-over */
+.content .breadcrumbs ul li a:hover {
+    color: #01447e;
+    text-decoration: underline;
+}
+
+
+
+
+
+
+
+/** Style the depth list **/
+.content ul.depth {
+    padding: 0.7rem 1rem;
+    list-style: none;
+    /*background-color: #4c4c4c;*/
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    /*justify-content: space-between;*/
+    justify-content: space-around;
+}
+
+/* Display list items side by side */
+.content ul.depth li {
+    /*display: inline-block;*/
+    /*display: inline;*/
+    font-size: 1.3rem;
+    padding: 0.5rem;
+}
+
+/* Add a slash symbol (/) before/behind each list item */
+/*.content ul.depth li+li:before {*/
+    /*padding: 8px;*/
+    /*color: #F0FFF0;*/
+    /*content: "/\00a0";*/
+/*}*/
+
+/* Add a color to all links inside the list */
+.content ul.depth li a {
+    color: black;
+    text-decoration: none;
+    display: inline-block;
+    width: 20%;
+    min-width: 10rem;
+    padding: 0.5rem;
+    text-align: center;
+    vertical-align: auto;
+    border-radius: 0.3rem;
+    background-color: #7e3f2c;
+    /*vertical-align: center;*/
+}
+.content ul.depth li a.selected {
+    background-color: coral;
+}
+
+/* Add a color on mouse-over */
+.content ul.depth li a:hover {
+    color: #c9c9c9;
+    text-decoration: none;
+}
+.content ul.depth li a.selected:hover {
+    color: #313131;
+}

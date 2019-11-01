@@ -5,39 +5,56 @@
 {% block body %}
 <div class="content">
     <h1><a href="/">Home</a></h1>
-    <h2>Current Path</h2>
-    <p>{{ current }}</p>
+
+    <nav class="breadcrumbs">
+        <ul>
+        {% for crumb in breadcrumbs %}
+            {% if crumb.url %}
+                <li><a href="{{ crumb.url }}">{{ crumb.title }}</a></li>
+            {% else %}
+                <li><span>{{ crumb.title }}</span></li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    </nav>
 
     <h2>Files count: {{ files | length }}</h2>
 
     <div class="btn-group">
         <button class="app-btn" id="view_images_btn">View images</button>
         {% if deletable %}
-        <button class="del-btn" id="delete_btn">Delete folder</button>
+            <button class="del-btn" id="delete_btn">Delete folder</button>
         {% endif %}
     </div>
 
     {% if deletable %}
-    <form id="del_form" name="del_form" action="" method="post" style="display: none">
-        <input type="hidden" name="delete" value="1">
-    </form>
+        <form id="del_form" name="del_form" action="" method="post" style="display: none">
+            <input type="hidden" name="delete" value="1">
+        </form>
     {% endif %}
 
     <h2>View file depth</h2>
-    <ul>
-        <li><a {{ (depth == 1) ? 'class="selected"' : '' }} href="{{ path('site', {'path': path }) }}">One</a></li>
-        <li><a {{ (depth == 2) ? 'class="selected"' : '' }} href="{{ path('site', {'path': path, 'depth': 2}) }}">Two</a></li>
-        <li><a {{ (depth == 3) ? 'class="selected"' : '' }} href="{{ path('site', {'path': path, 'depth': 3}) }}">Three</a></li>
-        <li><a {{ (depth == 0) ? 'class="selected"' : '' }} href="{{ path('site', {'path': path, 'depth': 0}) }}">Infinite</a></li>
+    <ul class="depth">
+        <li>
+            <a {{ (depth == 1) ? 'class="selected"' : '' }} href="{{ path('site', {'path': path }) }}">One</a></li>
+        <li>
+            <a {{ (depth == 2) ? 'class="selected"' : '' }} href="{{ path('site', {'path': path, 'depth': 2}) }}">Two</a>
+        </li>
+        <li>
+            <a {{ (depth == 3) ? 'class="selected"' : '' }} href="{{ path('site', {'path': path, 'depth': 3}) }}">Three</a>
+        </li>
+        <li>
+            <a {{ (depth == 0) ? 'class="selected"' : '' }} href="{{ path('site', {'path': path, 'depth': 0}) }}">Infinite</a>
+        </li>
     </ul>
 
     {% if directories | length > 0 %}
-    <h2>Subdirectories</h2>
-    <ul>
-        {% for link, dir in directories %}
-            <li><a href="{{ link }}">{{ dir }}</a></li>
-        {% endfor %}
-    </ul>
+        <h2>Subdirectories</h2>
+        <ul>
+            {% for link, dir in directories %}
+                <li><a href="{{ link }}">{{ dir }}</a></li>
+            {% endfor %}
+        </ul>
     {% endif %}
 
     {% if files | length > 0 %}
@@ -128,13 +145,12 @@
     </div>
 
 </div>
-
 {% endblock %}
 
 {% block javascripts %}
-    <script type="text/javascript">
-        window.slides = {{ slides | json_encode | raw }};
-    </script>
+<script type="text/javascript">
+    window.slides = {{ slides | json_encode | raw }};
+</script>
 
-    {{ parent() }}
+{{ parent() }}
 {% endblock %}

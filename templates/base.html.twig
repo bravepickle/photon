@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Photon{% endblock %}</title>
+        <link rel="apple-touch-icon" href="/apple-touch-favicon.png"/>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="icon" type="image/ico" href="/favicon.ico" />
+
         {% block stylesheets %}
             {#should be loaded via js#}
             <link href="{{ asset('build/app.css') }}" rel="stylesheet"/>
             <link href="{{ asset('build/vendors~app.css') }}" rel="stylesheet"/>
-            {#<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">#}
             <link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">
         {% endblock %}
     </head>
