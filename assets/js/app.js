@@ -49,11 +49,14 @@ if (viewBtn) {
     });
 }
 
-let delBtn = document.getElementById('del-btn');
+let delBtn = document.getElementById('delete_btn');
 
 if (delBtn) {
     delBtn.addEventListener('click', function () {
-
+        if (confirm('Are you sure you want to delete current folder with all contents?')) {
+            // console.log('forms', document.forms['del_form']);
+            document.forms['del_form'].submit();
+        }
     });
 }
 

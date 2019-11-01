@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,44 +12,35 @@ use Symfony\Component\Routing\Annotation\Route;
 class SiteController extends AbstractController
 {
     /**
-     * @Route("/{path}", name="site", requirements={"path"=".*"})
+     * @Route("/{path}", name="site", requirements={"path"=".*"}, defaults={"path":""})
      * @param string $path
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index(string $path = '', Request $request)
+    public function index(string $path, Request $request)
     {
-//        if ($path !== '') {
+        $pubFolder = rtrim('/storage/' . $path, '/');
+        $baseDir = $this->getParameter('kernel.project_dir') . '/public' . $pubFolder;
+
+        if ($request->isMethod('POST') && $request->request->getBoolean('delete') && $path !== '') {
+            $fs = new Filesystem();
+
+            if ($fs->exists($baseDir)) {
+                $fs->remove($baseDir);
+            }
+
+            return $this->redirectToRoute('site');
+        }
+
         $linkBase = $path === '' ? '' : trim('/' . $path, '/');
-//        }
 
         $depth = $request->query->getInt('depth', 1);
 
-//        $pubFolder = '/storage/' . ($path === '' ? '' : ('' . $path));
-//        $pubFolder = ($path === '' ? '' : ('/' . $path));
-//        $pubFolder = '/storage' . ($path === '' ? '' : ('/' . $path));
-//        $pubFolder = '/storage' . ($path === '' ? '' : $path);
-        $pubFolder = rtrim('/storage/' . $path, '/');
-//        $linkBase = $path;
-//
-//        dump($path);
-//        dump($linkBase);
-//        dump($pubFolder);
-//
-//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
-////        $pubFolder = ($path === '' ? '' : ('/' . $path));
-//        $baseLink = '/' . $path;
         $finder = new Finder();
-        $baseDir = $this->getParameter('kernel.project_dir') . '/public' . $pubFolder;
-//        $baseDir = $this->getParameter('kernel.project_dir') . '/public/storage' . $pubFolder;
-
-//        var_dump($baseDir);
-//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
 
         $directories = [];
         $files = [];
         $slides = [];
-
         $skipped = [];
 
         if (is_dir($baseDir)) {
@@ -106,6 +98,7 @@ class SiteController extends AbstractController
             'skipped' => $skipped,
             'slides' => array_values($slides),
             'depth' => $depth,
+            'deletable' => $path !== '',
         ]);
     }
 }

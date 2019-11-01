@@ -16,7 +16,8 @@ button.app-btn-toggle {
     padding: 1.2rem;
     border-radius: 5px;
     font-size: 1.1rem;
-    width: 10rem;
+    width: 20rem;
+    margin: 1.5rem;
 }
 
 .content a.selected {
@@ -48,6 +49,8 @@ button.app-btn-toggle {
 .content {
     font-size: 1.2rem;
     color: #F0FFF0;
+    margin: auto;
+    max-width: 60rem;
 }
 
 .content * {
@@ -95,3 +98,9 @@ body {
         height: 5rem;
     }
 }
+
+/*@media screen and (min-width: 800px) {*/
+    /*.content {*/
+        /*max-width: 50rem;*/
+    /*}*/
+/*}*/
