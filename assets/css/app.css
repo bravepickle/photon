@@ -1,15 +1,18 @@
 button.app-btn {
     color: black;
     background: greenyellow;
-    padding: 1.5rem;
+}
+
+button.del-btn {
+    color: black;
+    background: #ff6033;
     border-radius: 5px;
     font-size: 1.2rem;
-    width: 20rem;
 }
 
 button.app-btn-toggle {
     color: black;
-    background: greenyellow;
+    background: #0c9cff;
     padding: 1.2rem;
     border-radius: 5px;
     font-size: 1.1rem;
@@ -28,6 +31,14 @@ button.app-btn-toggle {
 
 .content li {
     padding: 0.2rem 0;
+}
+
+.content button:hover {
+    cursor: pointer;
+}
+
+.content button:active {
+    background-color: #9a9a9a;
 }
 
 .content .hidden {
@@ -50,4 +61,37 @@ button.app-btn-toggle {
 body {
     background-color: #313131;
     font-family: 'Raleway', sans-serif;
+}
+
+.btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.btn-group button {
+    width: 30%;
+    min-width: 10rem;
+    height: 5rem;
+    color: black;
+    padding: 1.0rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    margin: 1.5rem;
+    vertical-align: center;
+}
+
+
+@media screen and (max-width: 500px) {
+    .btn-group button {
+        width: 40%;
+        margin: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    button.app-btn-toggle {
+        padding: 1.2rem;
+        width: 20rem;
+        height: 5rem;
+    }
 }

@@ -55,7 +55,6 @@ class SiteController extends AbstractController
             $directoryObjs = $finder->in($baseDir)->sortByName()->directories();
             /** @var SplFileInfo $directoryObj */
             foreach ($directoryObjs as $directoryObj) {
-//                $link = $this->generateUrl('site', ['path' => $directoryObj->getRelativePathname()]);
                 $link = $linkBase . '/' . $directoryObj->getRelativePathname();
                 $directories[$link] = $pubFolder . '/' . $directoryObj->getRelativePathname();
             }
@@ -64,11 +63,7 @@ class SiteController extends AbstractController
                 $finder->depth('< ' . $depth);
             }
 
-//            var_dump($depth);
-//            die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
-
             $fileObjs = $finder->in($baseDir)->sortByName()->files();
-//            $fileObjs = $finder->in($baseDir)->sortByName()->files()->depth(0);
 //            $files = $finder->in($baseDir)->sortByName()->files()->name(['*.jpeg', '*.jpg', '*.gif', '*.png', '*.svg']);
 
             /** @var SplFileInfo $fileObj */
@@ -100,14 +95,8 @@ class SiteController extends AbstractController
             }
         }
 
-//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
-
         ksort($slides);
         sort($files);
-
-//        echo '<pre>';
-//        print_r($files);
-//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
 
         return $this->render('site/index.html.twig', [
             'current' => $pubFolder,

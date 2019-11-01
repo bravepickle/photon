@@ -30,10 +30,10 @@ let PhotoSwipeUI_Default = require('photoswipe/dist/photoswipe-ui-default');
 
 // console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 
-let btn = document.getElementById('view_images_btn');
+let viewBtn = document.getElementById('view_images_btn');
 
-if (btn) {
-    btn.addEventListener('click', function () {
+if (viewBtn) {
+    viewBtn.addEventListener('click', function () {
         let pswpElement = document.querySelectorAll('.pswp')[0];
 
         // define options (if needed)
@@ -46,6 +46,14 @@ if (btn) {
         // Initializes and opens PhotoSwipe
         let gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, window.slides, options);
         gallery.init();
+    });
+}
+
+let delBtn = document.getElementById('del-btn');
+
+if (delBtn) {
+    delBtn.addEventListener('click', function () {
+
     });
 }
 
