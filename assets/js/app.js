@@ -36,20 +36,6 @@ if (btn) {
     btn.addEventListener('click', function () {
         let pswpElement = document.querySelectorAll('.pswp')[0];
 
-        // // build items array
-        // let items = [
-        //     {
-        //         src: 'https://placekitten.com/600/400',
-        //         w: 600,
-        //         h: 400
-        //     },
-        //     {
-        //         src: 'https://placekitten.com/1200/900',
-        //         w: 1200,
-        //         h: 900
-        //     }
-        // ];
-
         // define options (if needed)
         let options = {
             // optionName: 'option value'
@@ -62,3 +48,18 @@ if (btn) {
         gallery.init();
     });
 }
+
+let toggleBtns = document.getElementsByClassName('app-btn-toggle');
+
+toggleBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        let targetEl = document.getElementById(this.getAttribute('data-target'));
+        targetEl.classList.toggle("hidden");
+
+        if (this.innerText === 'Show') {
+            this.innerText = 'Hide';
+        } else {
+            this.innerText = 'Show';
+        }
+    });
+});

@@ -7,6 +7,15 @@ button.app-btn {
     width: 20rem;
 }
 
+button.app-btn-toggle {
+    color: black;
+    background: greenyellow;
+    padding: 1.2rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    width: 10rem;
+}
+
 .content a.selected {
     font-weight: bold;
     color: #B0413E;
@@ -21,9 +30,17 @@ button.app-btn {
     padding: 0.2rem 0;
 }
 
+.content .hidden {
+    display: none;
+}
+
 .content {
     font-size: 1.2rem;
     color: #F0FFF0;
+}
+
+.content * {
+    font-family: 'Raleway', sans-serif;
 }
 
 .content * {
