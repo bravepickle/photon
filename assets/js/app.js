@@ -37,10 +37,16 @@ if (viewBtn) {
         let pswpElement = document.querySelectorAll('.pswp')[0];
 
         // define options (if needed)
+        // see https://photoswipe.com/documentation/options.html
         let options = {
-            // optionName: 'option value'
-            // for example:
-            index: 0 // start at first slide
+            index: 0, // start at first slide,
+            
+            // go from last to first on swipe next. This option has no relation to arrows navigation. Arrows loop is turned on permanently. You can modify this behavior by making custom UI.
+            // loop: false,
+
+            shareButtons: [
+                {id:'download', label:'Download image', url:'{{raw_image_url}}', download:true}
+            ],
         };
 
         // Initializes and opens PhotoSwipe
