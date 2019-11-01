@@ -19,7 +19,7 @@ class SiteController extends AbstractController
     public function index(string $path = '', Request $request)
     {
 //        if ($path !== '') {
-        $linkBase = $path === '' ? '' : '/' . $path;
+        $linkBase = $path === '' ? '' : trim('/' . $path, '/');
 //        }
 
         $depth = $request->query->getInt('depth', 1);
@@ -28,15 +28,15 @@ class SiteController extends AbstractController
 //        $pubFolder = ($path === '' ? '' : ('/' . $path));
 //        $pubFolder = '/storage' . ($path === '' ? '' : ('/' . $path));
 //        $pubFolder = '/storage' . ($path === '' ? '' : $path);
-        $pubFolder = '/storage' . $path;
+        $pubFolder = rtrim('/storage/' . $path, '/');
 //        $linkBase = $path;
 //
 //        dump($path);
 //        dump($linkBase);
 //        dump($pubFolder);
-
+//
 //        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
-//        $pubFolder = ($path === '' ? '' : ('/' . $path));
+////        $pubFolder = ($path === '' ? '' : ('/' . $path));
 //        $baseLink = '/' . $path;
         $finder = new Finder();
         $baseDir = $this->getParameter('kernel.project_dir') . '/public' . $pubFolder;
@@ -56,8 +56,8 @@ class SiteController extends AbstractController
             /** @var SplFileInfo $directoryObj */
             foreach ($directoryObjs as $directoryObj) {
 //                $link = $this->generateUrl('site', ['path' => $directoryObj->getRelativePathname()]);
-                $link = $linkBase . '/' . $directoryObj->getRelativePathname();
-                $directories[$link] = $pubFolder . '/' . $directoryObj->getRelativePathname();
+                $link = $linkBase . '/' . trim($directoryObj->getRelativePathname(), '/');
+                $directories[$link] = $pubFolder . '/' . trim($directoryObj->getRelativePathname());
             }
 
             if ($depth > 0) {
@@ -73,7 +73,7 @@ class SiteController extends AbstractController
 
             /** @var SplFileInfo $fileObj */
             foreach ($fileObjs as $fileObj) {
-                $src = $pubFolder . '/' . $fileObj->getRelativePathname();
+                $src = $pubFolder . '/' . trim($fileObj->getRelativePathname(), '/');
                 $ext = mb_strtolower($fileObj->getExtension());
 
                 switch ($ext) {
