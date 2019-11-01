@@ -10,13 +10,22 @@ use Symfony\Component\Routing\Annotation\Route;
 class SiteController extends AbstractController
 {
     /**
-     * @Route("/", name="site")
+     * @Route("/{path}", name="site", requirements={"path"=".*"})
+     * @param string $path
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function index(string $path = '')
     {
-        $pubFolder = '/storage';
+//        $pubFolder = '/storage/' . ($path === '' ? '' : ('' . $path));
+        $pubFolder = ($path === '' ? '' : ('/' . $path));
+//        $pubFolder = '/storage' . ($path === '' ? '' : ('/' . $path));
+//        $pubFolder = ($path === '' ? '' : ('/' . $path));
+//        $baseLink = '/' . $path;
         $finder = new Finder();
-        $baseDir = $this->getParameter('kernel.project_dir') . '/public' . $pubFolder;
+        $baseDir = $this->getParameter('kernel.project_dir') . '/public/storage' . $pubFolder;
+
+//        var_dump($baseDir);
+//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
 
         $directories = [];
         $files = [];
@@ -28,14 +37,17 @@ class SiteController extends AbstractController
             $directoryObjs = $finder->in($baseDir)->sortByName()->directories();
             /** @var SplFileInfo $directoryObj */
             foreach ($directoryObjs as $directoryObj) {
-                $directories[] = $pubFolder . '/' . $directoryObj->getRelativePathname();
+                $link = $this->generateUrl('site', ['path' => $directoryObj->getRelativePathname()]);
+                $directories[$link] = $pubFolder . '/' . $directoryObj->getRelativePathname();
             }
 
-            $fileObjs = $finder->in($baseDir)->sortByName()->files();
+            $fileObjs = $finder->in($baseDir)->sortByName()->files()->depth(0);
 //            $files = $finder->in($baseDir)->sortByName()->files()->name(['*.jpeg', '*.jpg', '*.gif', '*.png', '*.svg']);
 
             /** @var SplFileInfo $fileObj */
             foreach ($fileObjs as $fileObj) {
+                dump($fileObj);
+
                 $src = $pubFolder . '/' . $fileObj->getRelativePathname();
                 $ext = mb_strtolower($fileObj->getExtension());
 
@@ -46,10 +58,6 @@ class SiteController extends AbstractController
                     case 'png':
                     case 'jpg':
                         $size = getimagesize($fileObj->getPathname());
-
-//                        dump($fileObj->getPath());
-//                        dump($size);
-//                        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
 
                         $slides[] = [
                             'src' => $src,
@@ -62,21 +70,9 @@ class SiteController extends AbstractController
                         $skipped[] = $src;
                 }
 
-//                var_dump($fileObj->getFileInfo());
-//                var_dump($fileObj->getExtension());
-//                die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
-//                $img = imagecreatefromstr
-
-                $files[] = $src;
+                $files[] = $src; // we need it only for debug now
             }
-
-//            die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
         }
-
-//        dump($skipped);
-//        dump($slides);
-//
-//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
 
         return $this->render('site/index.html.twig', [
             'path' => $pubFolder,
