@@ -30,32 +30,35 @@ let PhotoSwipeUI_Default = require('photoswipe/dist/photoswipe-ui-default');
 
 // console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 
+let btn = document.getElementById('view_images_btn');
 
-let pswpElement = document.querySelectorAll('.pswp')[0];
+if (btn) {
+    btn.addEventListener('click', function () {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
 
-console.log('here!!', pswpElement);
+        // // build items array
+        // let items = [
+        //     {
+        //         src: 'https://placekitten.com/600/400',
+        //         w: 600,
+        //         h: 400
+        //     },
+        //     {
+        //         src: 'https://placekitten.com/1200/900',
+        //         w: 1200,
+        //         h: 900
+        //     }
+        // ];
 
-// build items array
-let items = [
-    {
-        src: 'https://placekitten.com/600/400',
-        w: 600,
-        h: 400
-    },
-    {
-        src: 'https://placekitten.com/1200/900',
-        w: 1200,
-        h: 900
-    }
-];
+        // define options (if needed)
+        let options = {
+            // optionName: 'option value'
+            // for example:
+            index: 0 // start at first slide
+        };
 
-// define options (if needed)
-let options = {
-    // optionName: 'option value'
-    // for example:
-    index: 0 // start at first slide
-};
-
-// Initializes and opens PhotoSwipe
-let gallery = new PhotoSwipe( pswpElement, PhotoSwipeUI_Default, items, options);
-gallery.init();
+        // Initializes and opens PhotoSwipe
+        let gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, window.slides, options);
+        gallery.init();
+    });
+}

@@ -9,13 +9,26 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Hello!</h1>
 
-    This friendly message is coming from:
+    <h2>Current path</h2>
+    <p>{{ path }}</p>
+
+    <h2>Directories in folder</h2>
     <ul>
-        <li>Your controller at <code><a href="{{ 'src/Controller/SiteController.php'|file_link(0) }}">src/Controller/SiteController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'templates/site/index.html.twig'|file_link(0) }}">templates/site/index.html.twig</a></code></li>
+        {% for dir in directories %}
+            <li>{{ dir }}</li>
+        {% endfor %}
     </ul>
+
+    <h2>Files in folder</h2>
+    <ul>
+        {% for file in files %}
+            <li>{{ file }}</li>
+        {% endfor %}
+    </ul>
+
+    <button id="view_images_btn">View images</button>
 </div>
 
 <!-- Root element of PhotoSwipe. Must have class pswp. -->
@@ -85,4 +98,12 @@
 
 </div>
 
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript">
+        window.slides = {{ slides | json_encode | raw }}
+    </script>
+
+    {{ parent() }}
 {% endblock %}
