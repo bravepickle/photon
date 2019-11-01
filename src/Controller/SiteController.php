@@ -56,8 +56,8 @@ class SiteController extends AbstractController
             /** @var SplFileInfo $directoryObj */
             foreach ($directoryObjs as $directoryObj) {
 //                $link = $this->generateUrl('site', ['path' => $directoryObj->getRelativePathname()]);
-                $link = $linkBase . '/' . trim($directoryObj->getRelativePathname(), '/');
-                $directories[$link] = $pubFolder . '/' . trim($directoryObj->getRelativePathname());
+                $link = $linkBase . '/' . $directoryObj->getRelativePathname();
+                $directories[$link] = $pubFolder . '/' . $directoryObj->getRelativePathname();
             }
 
             if ($depth > 0) {
@@ -73,7 +73,7 @@ class SiteController extends AbstractController
 
             /** @var SplFileInfo $fileObj */
             foreach ($fileObjs as $fileObj) {
-                $src = $pubFolder . '/' . trim($fileObj->getRelativePathname(), '/');
+                $src = $pubFolder . '/' . $fileObj->getRelativePathname();
                 $ext = mb_strtolower($fileObj->getExtension());
 
                 switch ($ext) {
