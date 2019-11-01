@@ -1,7 +1,36 @@
-button {
+button.app-btn {
     color: black;
     background: greenyellow;
-    padding: 10px;
+    padding: 1.5rem;
     border-radius: 5px;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    width: 20rem;
+}
+
+.content a.selected {
+    font-weight: bold;
+    color: #B0413E;
+}
+
+.content a {
+    color: #1880ee;
+    text-decoration: none;
+}
+
+.content li {
+    padding: 0.2rem 0;
+}
+
+.content {
+    font-size: 1.2rem;
+    color: #F0FFF0;
+}
+
+.content * {
+    font-family: 'Raleway', sans-serif;
+}
+
+body {
+    background-color: #313131;
+    font-family: 'Raleway', sans-serif;
 }
