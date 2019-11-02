@@ -68,6 +68,11 @@ button.app-btn-toggle {
     font-family: 'Raleway', sans-serif;
 }
 
+header img.img-logo {
+    position: relative;
+    top: 0.5rem;
+}
+
 body {
     background-color: #313131;
     font-family: 'Raleway', sans-serif;
