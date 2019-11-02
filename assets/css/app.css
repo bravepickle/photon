@@ -139,11 +139,9 @@ body {
     text-decoration: underline;
 }
 
-
-
-
-
-
+.content #folders_list a:visited {
+    color: #0c69b5;
+}
 
 /** Style the depth list **/
 .content ul.depth {

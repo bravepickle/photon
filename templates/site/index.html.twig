@@ -50,7 +50,7 @@
 
     {% if directories | length > 0 %}
         <h2>Subdirectories</h2>
-        <ul>
+        <ul id="folders_list">
             {% for link, dir in directories %}
                 <li><a href="{{ link }}">{{ dir }}</a></li>
             {% endfor %}
