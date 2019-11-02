@@ -32,7 +32,7 @@ class SiteController extends AbstractController
             return $this->redirectToRoute('site');
         }
 
-//        $linkBase = '/' . ($path === '' ? '' : trim($path, '/'));
+        $linkBase = $path === '' ? '' : ('/' . trim($path, '/'));
 
         $depth = $request->query->getInt('depth', 1);
 
@@ -47,8 +47,8 @@ class SiteController extends AbstractController
             $directoryObjs = $finder->in($baseDir)->sortByName()->directories();
             /** @var SplFileInfo $directoryObj */
             foreach ($directoryObjs as $directoryObj) {
-                $link = '/' . $directoryObj->getRelativePathname();
-//                $link = $linkBase . '/' . $directoryObj->getRelativePathname();
+//                $link = '/' . $directoryObj->getRelativePathname();
+                $link = $linkBase . '/' . $directoryObj->getRelativePathname();
                 $directories[$link] = $pubFolder . '/' . $directoryObj->getRelativePathname();
             }
 
