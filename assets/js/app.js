@@ -217,6 +217,7 @@
 
     window.addEventListener('load', function () {
         let viewBtn = document.getElementById('view_images_btn');
+        let galleryIndex = 0;
 
         if (viewBtn) {
             viewBtn.addEventListener('click', function () {
@@ -225,7 +226,7 @@
                 // define options (if needed)
                 // see https://photoswipe.com/documentation/options.html
                 let options = {
-                    index: 0, // start at first slide,
+                    index: galleryIndex,
 
                     // go from last to first on swipe next. This option has no relation to arrows navigation. Arrows loop is turned on permanently. You can modify this behavior by making custom UI.
                     // loop: false,
@@ -264,8 +265,14 @@
                 }
 
 
+
                 // Initializes and opens PhotoSwipe
                 let gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, window.slides, options);
+
+                gallery.listen('close', function() {
+                    galleryIndex = gallery.getCurrentIndex();
+                });
+
                 gallery.init();
             });
         }
