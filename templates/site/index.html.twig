@@ -11,6 +11,7 @@
             </a>
         </h1>
     </header>
+
     <nav class="breadcrumbs">
         <ul>
         {% for crumb in breadcrumbs %}
@@ -60,10 +61,11 @@
 
     {% if files | length > 0 %}
         <div id="files_list" class="hidden">
+        {#<div id="files_list" class="">#}
             <h2>Files in folder</h2>
             <ul>
                 {% for file in files %}
-                    <li><a href="{{ file }}">{{ file }}</a></li>
+                    <li><i title="Move up" class="fas fa-arrow-circle-up move-up"></i> <i title="Move down" class="fas fa-arrow-circle-down move-down"></i><a href="{{ file }}">{{ file }}</a></li>
                 {% endfor %}
             </ul>
         </div>
