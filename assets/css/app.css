@@ -3,6 +3,11 @@ button.app-btn {
     background: #85cb2b;
 }
 
+.content button.app-btn:hover {
+    color: #6b6b6b;
+}
+
+
 button.del-btn {
     color: black;
     background: #ff6033;
@@ -99,6 +104,10 @@ body {
     margin: 1.5rem;
     vertical-align: center;
     border-width: 0;
+}
+
+.btn-group button:hover {
+    color: #c9c9c9;
 }
 
 
