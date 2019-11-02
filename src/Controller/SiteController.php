@@ -22,6 +22,10 @@ class SiteController extends AbstractController
         $pubFolder = rtrim('/storage/' . $path, '/');
         $baseDir = $this->getParameter('kernel.project_dir') . '/public' . $pubFolder;
 
+        if (!is_dir($baseDir)) { // base dir for files not found
+            return $this->redirectToRoute('site');
+        }
+
         if ($request->isMethod('POST') && $request->request->getBoolean('delete') && $path !== '') {
             return $this->deleteFolder($path, $baseDir);
         }
