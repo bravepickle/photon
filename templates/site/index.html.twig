@@ -27,7 +27,9 @@
     <h2>Files count: {{ files | length }}</h2>
 
     <div class="btn-group">
+        {% if files | length > 0 %}
         <button class="app-btn" id="view_images_btn">View images</button>
+        {% endif %}
         {% if deletable %}
             <button class="del-btn" id="delete_btn">Delete folder</button>
         {% endif %}
