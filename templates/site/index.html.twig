@@ -57,14 +57,20 @@
         </ul>
     {% endif %}
 
-    {% if files | length > 0 %}
-        <h2>Files in folder</h2>
+    <div class="btn-group">
         <button class="app-btn-toggle" data-target="files_list">Show</button>
-        <ul id="files_list" class="hidden">
-            {% for file in files %}
-                <li>{{ file }}</li>
-            {% endfor %}
-        </ul>
+        <button class="visits-btn" id="toggle_visits_tracking_btn">Visits</button>
+    </div>
+
+    {% if files | length > 0 %}
+        <div id="files_list" class="hidden">
+            <h2>Files in folder</h2>
+            <ul>
+                {% for file in files %}
+                    <li>{{ file }}</li>
+                {% endfor %}
+            </ul>
+        </div>
     {% endif %}
 
     {% if skipped | length > 0 %}
@@ -150,6 +156,7 @@
 {% block javascripts %}
 <script type="text/javascript">
     window.slides = {{ slides | json_encode | raw }};
+    window.currentPath = '{{ path | raw }}';
 </script>
 
 {{ parent() }}

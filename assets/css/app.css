@@ -10,6 +10,13 @@ button.del-btn {
     font-size: 1.2rem;
 }
 
+button.visits-btn {
+    color: black;
+    background: #7e3f2c;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
 button.app-btn-toggle {
     color: black;
     background: #0c9cff;
@@ -82,6 +89,7 @@ body {
     font-size: 1.2rem;
     margin: 1.5rem;
     vertical-align: center;
+    border-width: 0;
 }
 
 
@@ -94,7 +102,6 @@ body {
 
     button.app-btn-toggle {
         padding: 1.2rem;
-        width: 20rem;
         height: 5rem;
     }
 }
@@ -139,7 +146,7 @@ body {
     text-decoration: underline;
 }
 
-.content #folders_list a:visited {
+.content #folders_list a:visited, .content #folders_list a.visited {
     color: #0c69b5;
 }
 
@@ -186,7 +193,7 @@ body {
     background-color: #7e3f2c;
     /*vertical-align: center;*/
 }
-.content ul.depth li a.selected {
+.content ul.depth li a.selected, .visits-btn.selected {
     background-color: coral;
 }
 
