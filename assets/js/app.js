@@ -40,7 +40,7 @@ if (viewBtn) {
         // see https://photoswipe.com/documentation/options.html
         let options = {
             index: 0, // start at first slide,
-            
+
             // go from last to first on swipe next. This option has no relation to arrows navigation. Arrows loop is turned on permanently. You can modify this behavior by making custom UI.
             // loop: false,
 
