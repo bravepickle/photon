@@ -48,6 +48,11 @@
         </li>
     </ul>
 
+    <div class="btn-group">
+        <button class="app-btn-toggle" data-target="files_list">Show</button>
+        <button class="visits-btn" id="toggle_visits_tracking_btn">Visits</button>
+    </div>
+
     {% if directories | length > 0 %}
         <h2>Subdirectories</h2>
         <ul id="folders_list">
@@ -56,11 +61,6 @@
             {% endfor %}
         </ul>
     {% endif %}
-
-    <div class="btn-group">
-        <button class="app-btn-toggle" data-target="files_list">Show</button>
-        <button class="visits-btn" id="toggle_visits_tracking_btn">Visits</button>
-    </div>
 
     {% if files | length > 0 %}
         <div id="files_list" class="hidden">
