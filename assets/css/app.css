@@ -1,6 +1,6 @@
 button.app-btn {
     color: black;
-    background: greenyellow;
+    background: #85cb2b;
 }
 
 button.del-btn {
@@ -19,7 +19,7 @@ button.visits-btn {
 
 button.app-btn-toggle {
     color: black;
-    background: #0c9cff;
+    background: #0C74BA;
     padding: 1.2rem;
     border-radius: 5px;
     font-size: 1.1rem;
@@ -33,7 +33,7 @@ button.app-btn-toggle {
 }
 
 .content a {
-    color: #1880ee;
+    color: #0C74BA;
     text-decoration: none;
 }
 
@@ -71,6 +71,10 @@ button.app-btn-toggle {
 header img.img-logo {
     position: relative;
     top: 0.5rem;
+}
+
+.content header h1 a {
+    color: #0C74BA;
 }
 
 body {
@@ -152,7 +156,7 @@ body {
 }
 
 .content #folders_list a:visited, .content #folders_list a.visited {
-    color: #0c69b5;
+    color: #0c5c9a;
 }
 
 /** Style the depth list **/
