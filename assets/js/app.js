@@ -44,6 +44,8 @@ if (viewBtn) {
             // go from last to first on swipe next. This option has no relation to arrows navigation. Arrows loop is turned on permanently. You can modify this behavior by making custom UI.
             // loop: false,
 
+            maxSpreadZoom: 5, // Maximum zoom level when performing spread (zoom) gesture.
+
             shareButtons: [
                 {id:'download', label:'Download image', url:'{{raw_image_url}}', download:true}
             ],

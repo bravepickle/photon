@@ -23,13 +23,7 @@ class SiteController extends AbstractController
         $baseDir = $this->getParameter('kernel.project_dir') . '/public' . $pubFolder;
 
         if ($request->isMethod('POST') && $request->request->getBoolean('delete') && $path !== '') {
-            $fs = new Filesystem();
-
-            if ($fs->exists($baseDir)) {
-                $fs->remove($baseDir);
-            }
-
-            return $this->redirectToRoute('site');
+            return $this->deleteFolder($path, $baseDir);
         }
 
         $linkBase = $path === '' ? '' : ('/' . trim($path, '/'));
@@ -141,5 +135,31 @@ class SiteController extends AbstractController
         }
 
         return $breadcrumbs;
+    }
+
+    /**
+     * @param string $path
+     * @param string $baseDir
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    protected function deleteFolder(string $path, string $baseDir): \Symfony\Component\HttpFoundation\RedirectResponse
+    {
+        $fs = new Filesystem();
+
+        $redirectPath = $path;
+
+        if ($fs->exists($baseDir)) {
+            $fs->remove($baseDir);
+
+            $pathSlugs = explode('/', $redirectPath);
+            if (count($pathSlugs) > 1) {
+                unset($pathSlugs[count($pathSlugs) - 1]);
+                $redirectPath = implode('/', $pathSlugs);
+            } else {
+                $redirectPath = '';
+            }
+        }
+
+        return $this->redirectToRoute('site', ['path' => $redirectPath]);
     }
 }
