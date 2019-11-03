@@ -95,35 +95,50 @@
 
   // Header menu
 
-  .menu ul.menu-list {
-    padding: 0.7rem 1rem;
-    list-style: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-around;
+  #menu {
+    ul {
+      list-style: none;
+    }
+
+    .themes-container {
+      position: relative;
+
+      a {
+        color: #aacd4e;
+      }
+
+      ul {
+        position: absolute;
+        top: 2rem;
+        //left: 0;
+        right: 0;
+        width: 12.5rem;
+        //padding: 0;
+        background-color: #4c4c4c;
+        padding: 0.3rem;
+        border-radius: 0.2rem;
+        box-shadow: 0.2rem 0.2rem 0.5rem black;
+      }
+
+      .selected {
+        color: #e44816;
+        cursor: default;
+      }
+    }
+
+    ul.menu-list {
+      padding: 0.7rem 1rem;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+
+      li {
+        //border: 1px solid white;
+      }
+    }
+
   }
 
-  /* Display list items side by side */
-  //ul.depth li {
-  //  font-size: 1.4rem;
-  //  padding: 0.5rem;
-  //}
-
-  /* Add a color to all links inside the list */
-  ul.depth li a {
-    text-decoration: none;
-    display: inline-block;
-    width: 20%;
-    min-width: 10rem;
-    padding: 0.5rem;
-    text-align: center;
-    vertical-align: auto;
-    border-radius: 0.3rem;
-  }
-
-  ul.depth li a.selected, .visits-btn.selected {
-    font-weight: bold;
-  }
 }

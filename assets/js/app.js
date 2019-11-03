@@ -301,6 +301,26 @@
             });
         });
 
+        let themeBtn = document.getElementById('current-theme');
+        let themeListEl = document.getElementById('themes');
+        let themeSelected = themeListEl.querySelector('.selected');
+
+        if (themeSelected !== null) {
+            themeSelected.addEventListener('click', function (event) {
+                event.preventDefault(); // never click this link
+            });
+        }
+
+        themeBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            themeListEl.classList.toggle('hidden');
+        });
+
+        // themeBtn.addEventListener('click', function () {
+        //     themeListEl.classList.toggle('hidden');
+        // });
+
         new VisitsTracker(window.currentPath);
     });
 }());
