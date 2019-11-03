@@ -57,7 +57,6 @@ Encore
     // enables Sass/SCSS support
     .enableSassLoader()
     .addStyleEntry('dark-theme', './assets/theme/dark-theme/dark-theme.scss')
-    .addStyleEntry('inverted-dark-theme', './assets/theme/inverted-dark-theme/inverted-dark-theme.scss')
     .addStyleEntry('light-theme', './assets/theme/light-theme/light-theme.scss')
     .addStyleEntry('monochrome-dark-theme', './assets/theme/monochrome-dark-theme/monochrome-dark-theme.scss')
 

@@ -133,8 +133,13 @@ class SiteController extends AbstractController
         $themeLabelsMap = [
             self::DARK_THEME => 'Dark',
             self::LIGHT_THEME => 'Light',
-            self::MONOCHROME_DARK_THEME => 'Monochrome dark',
+            self::MONOCHROME_DARK_THEME => 'Monochrome',
         ];
+
+        if (!isset($themeLabelsMap[$theme])) { // unknown theme
+            $theme = self::DARK_THEME;
+            $request->cookies->remove(self::COOKIE_THEME_NAME);
+        }
 
         return $this->render('site/index.html.twig', [
             'path' => $path,

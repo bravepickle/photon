@@ -1,6 +1,31 @@
 // Responsive layout & controls
-@media screen and (max-width: 500px) {
+@import "variables";
+
+@media screen and (max-width: 60rem) {
+//@media screen and (max-width: 600px) {
+//  .content #menu .themes-container {
+//    left: -0.5rem;
+//  }
   .content {
+    padding: 0 0.5rem;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  //body {
+  //  font-size: $default-font-size-min;
+  //}
+
+  body .content {
+    //* {
+    //  font-size: $default-font-size-min;
+    //}
+
+    //#menu .themes-container {
+    //  left: -8pt;
+    //  //padding-right: 14pt;
+    //}
+
     .btn-group button {
       width: 40%;
       margin: 0.5rem;
@@ -12,4 +37,34 @@
       height: 5rem;
     }
   }
+}
+
+// Calculating minimal font-size
+// see https://css-tricks.com/snippets/css/fluid-typography/
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+@mixin fluid-type($min-vw, $max-vw, $min-font-size, $max-font-size) {
+  $u1: unit($min-vw);
+  $u2: unit($max-vw);
+  $u3: unit($min-font-size);
+  $u4: unit($max-font-size);
+
+  @if $u1 == $u2 and $u1 == $u3 and $u1 == $u4 {
+    & {
+      font-size: $min-font-size;
+      @media screen and (min-width: $min-vw) {
+        font-size: calc(#{$min-font-size} + #{strip-unit($max-font-size - $min-font-size)} * ((100vw - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}));
+      }
+      @media screen and (min-width: $max-vw) {
+        font-size: $max-font-size;
+      }
+    }
+  }
+}
+
+html {
+  @include fluid-type(100pt, 800pt, $default-font-size-min, $default-font-size-max);
 }
