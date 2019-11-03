@@ -224,22 +224,36 @@ body {
     color: #313131;
 }
 
+#files_list ul {
+    padding-left: 5rem;
+}
+
+#files_list li {
+    position: relative;
+}
+
 #files_list li, #folders_list li {
     list-style: none;
 }
 
 .move-up, .move-down {
     font-size: 1.5rem;
-    position: relative;
+    position: absolute;
     top: 0.2rem;
-    left: -1.2rem;
     margin: 0 0.2rem;
     color: #5fb689;
     cursor: pointer;
 }
 
+.move-up {
+    left: -4.6rem;
+}
+
+.move-down {
+    left: -2.4rem;
+}
+
 li:first-child .move-up, li:last-child .move-down {
-    /*visibility: hidden;*/
     color: #9f9f9f;
     cursor: default;
 }
