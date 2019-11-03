@@ -6,11 +6,47 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class SiteController extends AbstractController
 {
+    const COOKIE_THEME_NAME = 'theme';
+
+    const DARK_THEME = 'dark-theme';
+    const MONOCHROME_DARK_THEME = 'monochrome-dark-theme';
+    const LIGHT_THEME = 'light-theme';
+
+    /**
+     * @Route("/switch-theme/{name}", name="switch-theme", requirements={"name"="^[^/]+"}, defaults={"name": "dark-theme"})
+     * @param string $name
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function switchTheme(string $name, Request $request)
+    {
+        // todo: go to src url
+        $allowedThemes = [
+            self::DARK_THEME,
+            self::MONOCHROME_DARK_THEME,
+            self::LIGHT_THEME,
+        ];
+
+        if (!in_array($name, $allowedThemes)) {
+            throw new BadRequestHttpException('Unknown theme was selected: ' . $name);
+        }
+
+//        var_dump($name);
+//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
+
+        $response = $this->redirectToRoute('site', ['path' => $request->query->getAlpha('url')]);
+        $response->headers->setCookie(Cookie::create(self::COOKIE_THEME_NAME, $name, '+3 months'));
+
+        return $response;
+    }
+
     /**
      * @Route("/{path}", name="site", requirements={"path"=".*"}, defaults={"path":""})
      * @param string $path
@@ -91,6 +127,24 @@ class SiteController extends AbstractController
 
         $breadcrumbs = $this->buildBreadcrumbs($pubFolder);
 
+//        echo '<pre>';
+//        var_dump($request->cookies->get(self::COOKIE_THEME_NAME, self::DARK_THEME));
+//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
+
+        $theme = $request->cookies->get(self::COOKIE_THEME_NAME, self::DARK_THEME);
+
+        $themeIconsMap = [
+            self::DARK_THEME => 'fas fa-moon',
+            self::LIGHT_THEME => 'fas fa-sun',
+            self::MONOCHROME_DARK_THEME => 'fas fa-cloud-moon',
+        ];
+
+        $themeLabelsMap = [
+            self::DARK_THEME => 'Dark',
+            self::LIGHT_THEME => 'Light',
+            self::MONOCHROME_DARK_THEME => 'Monochrome dark',
+        ];
+
         return $this->render('site/index.html.twig', [
             'path' => $path,
             'breadcrumbs' => $breadcrumbs,
@@ -99,6 +153,9 @@ class SiteController extends AbstractController
             'skipped' => $skipped,
             'slides' => array_values($slides),
             'depth' => $depth,
+            'theme' => $theme,
+            'themeLabel' => $themeLabelsMap[$theme],
+            'themeIcon' => $themeIconsMap[$theme],
             'deletable' => $path !== '',
         ]);
     }
@@ -166,4 +223,5 @@ class SiteController extends AbstractController
 
         return $this->redirectToRoute('site', ['path' => $redirectPath]);
     }
+
 }

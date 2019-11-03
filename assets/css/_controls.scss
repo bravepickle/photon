@@ -4,8 +4,6 @@
 .content {
   /*** Basic ***/
   button {
-    color: $btn-default-font-color;
-    background-color: $btn-default-background-color;
     border-radius: $btn-default-border-radius;
     border-width: $btn-default-border-width;
     padding: $btn-default-padding;
@@ -15,40 +13,11 @@
 
   button:hover {
     cursor: pointer;
-    color: $btn-default-font-color-hover;
-  }
-
-  button:active {
-    background-color: $btn-default-background-color-active;
   }
 
   /*** Custom ***/
-  button.app-btn {
-    color: $btn-default-font-color;
-    background: $btn-primary-background-color;
-  }
-
-  button.app-btn:hover {
-    color: $btn-primary-font-color-hover;
-  }
-
-  button.del-btn {
-    color: $btn-alert-font-color;
-    background: $btn-alert-background-color;
-    border-radius: 5px;
-  }
-
-  button.visits-btn {
-    color: $btn-default-font-color;
-    background: $btn-default-background-color;
-    border-radius: 5px;
-  }
-
   button.app-btn-toggle {
-    color: $btn-secondary-font-color;
-    background: $btn-secondary-background-color;
     padding: 1.2rem;
-    border-radius: 5px;
     width: 20rem;
     margin: 1.5rem;
   }
@@ -64,10 +33,6 @@
     min-width: 10rem;
     height: 5rem;
     margin: 1.5rem;
-  }
-
-  .btn-group button:active {
-    background-color: $btn-default-background-color-active;
   }
 
   /** Style the depth list **/
@@ -89,7 +54,6 @@
 
   /* Add a color to all links inside the list */
   ul.depth li a {
-    color: $btn-default-font-color;
     text-decoration: none;
     display: inline-block;
     width: 20%;
@@ -98,25 +62,10 @@
     text-align: center;
     vertical-align: auto;
     border-radius: 0.3rem;
-    background-color: $btn-default-background-color;
   }
 
   ul.depth li a.selected, .visits-btn.selected {
     font-weight: bold;
-    color: $btn-selected-font-color;
-    background-color: $btn-selected-background-color;
-  }
-
-  ul.depth li a:hover {
-    color: $btn-default-font-color-hover;
-  }
-
-  ul.depth li a.selected:hover {
-    color: $btn-selected-font-color-hover;
-  }
-
-  ul.depth li a:active {
-      background-color: $btn-default-background-color-active;
   }
 
   /** Files sorting **/
@@ -125,16 +74,7 @@
     position: absolute;
     top: 0.2rem;
     margin: 0 0.2rem;
-    color: $btn-sort-move-font-color;
     cursor: pointer;
-  }
-
-  .move-up:hover, .move-down:hover {
-    color: $btn-sort-move-font-color-hover;
-  }
-
-  .move-up:active, .move-down:active {
-    color: $btn-sort-move-font-color-active;
   }
 
   .move-up {
@@ -146,7 +86,44 @@
   }
 
   li:first-child .move-up, li:last-child .move-down {
-    color: $btn-sort-move-font-color-muted;
     cursor: default;
+  }
+
+
+
+
+
+  // Header menu
+
+  .menu ul.menu-list {
+    padding: 0.7rem 1rem;
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  /* Display list items side by side */
+  //ul.depth li {
+  //  font-size: 1.4rem;
+  //  padding: 0.5rem;
+  //}
+
+  /* Add a color to all links inside the list */
+  ul.depth li a {
+    text-decoration: none;
+    display: inline-block;
+    width: 20%;
+    min-width: 10rem;
+    padding: 0.5rem;
+    text-align: center;
+    vertical-align: auto;
+    border-radius: 0.3rem;
+  }
+
+  ul.depth li a.selected, .visits-btn.selected {
+    font-weight: bold;
   }
 }

@@ -1,0 +1,46 @@
+@import "variables";
+
+body {
+  color: $default-font-color;
+  background-color: $default-background-color;
+}
+
+.content {
+  /*** Basic ***/
+  a {
+    color: $link-default-font-color;
+  }
+
+  a:visited, a.visited {
+    color: $link-default-font-color-visited;
+  }
+
+  a:hover {
+    color: $link-default-font-color-hover;
+  }
+
+  a:active {
+    color: $link-default-font-color-active;
+  }
+
+  /*** Breadcrumbs ***/
+  .breadcrumbs ul {
+    background-color: $breadcrumbs-background-color;
+  }
+
+  .breadcrumbs ul li {
+    color: $breadcrumbs-font-color;
+  }
+
+  .breadcrumbs ul li + li:before {
+    color: $breadcrumbs-font-color;
+  }
+
+  .breadcrumbs ul li a {
+    color: $breadcrumbs-link-font-color;
+  }
+
+  .breadcrumbs ul li a:hover {
+    color: $breadcrumbs-link-font-color-hover;
+  }
+}

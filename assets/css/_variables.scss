@@ -1,10 +1,7 @@
 // Common variables & defaults
 //noinspection CssUnknownTarget
 @import url(https://fonts.googleapis.com/css?family=Raleway&display=swap);
-@import "monochrome-dark-theme";
-//@import "inverted-dark-theme";
-//@import "dark-theme";
-//@import "light-theme";
+//@import "../theme/monochrome-dark-theme/monochrome-dark-theme";
 
 // basic defaults
 $default-font-size: 1.2rem;

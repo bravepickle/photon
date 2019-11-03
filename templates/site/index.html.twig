@@ -2,14 +2,37 @@
 
 {% block title %}Photon | Gallery{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('build/' ~ theme ~'.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body %}
 <div class="content">
-    <header>
-        <h1>
-            <a href="/"><img class="img-logo" src="{{ asset('/favicon.png') }}" alt="Photon logo" title="Photon">
-                Photon
-            </a>
-        </h1>
+    <header id="menu">
+        <ul class="menu-list">
+            <li>
+                <h1>
+                    <a href="/"><img class="img-logo" src="{{ asset('/favicon.png') }}" alt="Photon logo" title="Photon">
+                        Photon
+                    </a>
+                </h1>
+            </li>
+            <li>
+                <a id="current-theme"><i class="{{ themeIcon }}"></i> {{ themeLabel }}</a>
+                <ul class="themes">
+                    <li>
+                        <a href="{{ path('switch-theme', {'name': 'dark-theme','url': path}) }}"><i class="fas fa-moon"></i> Dark</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('switch-theme', {'name': 'light-theme','url': path}) }}"><i class="fas fa-sun"></i> Light</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('switch-theme', {'name': 'monochrome-dark-theme','url': path}) }}"><i class="fas fa-cloud-moon"></i> Monochrome dark</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </header>
 
     <nav class="breadcrumbs">

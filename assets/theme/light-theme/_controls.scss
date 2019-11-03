@@ -1,0 +1,91 @@
+// styles for controls
+@import "variables";
+
+.content {
+  /*** Basic ***/
+  button {
+    color: $btn-default-font-color;
+    background-color: $btn-default-background-color;
+  }
+
+  button:hover {
+    color: $btn-default-font-color-hover;
+  }
+
+  button:active {
+    background-color: $btn-default-background-color-active;
+  }
+
+  /*** Custom ***/
+  button.app-btn {
+    color: $btn-default-font-color;
+    background-color: $btn-primary-background-color;
+  }
+
+  button.app-btn:hover {
+    color: $btn-primary-font-color-hover;
+  }
+
+  button.del-btn {
+    color: $btn-alert-font-color;
+    background-color: $btn-alert-background-color;
+  }
+
+  button.visits-btn {
+    color: $btn-default-font-color;
+    background-color: $btn-default-background-color;
+  }
+
+  button.app-btn-toggle {
+    color: $btn-secondary-font-color;
+    background-color: $btn-secondary-background-color;
+    padding: 1.2rem;
+    border-radius: 5px;
+    width: 20rem;
+    margin: 1.5rem;
+  }
+
+  .btn-group button:active {
+    background-color: $btn-default-background-color-active;
+  }
+
+  /* Add a color to all links inside the list */
+  ul.depth li a {
+    color: $btn-default-font-color;
+    background-color: $btn-default-background-color;
+  }
+
+  ul.depth li a.selected, .visits-btn.selected {
+    color: $btn-selected-font-color;
+    background-color: $btn-selected-background-color;
+  }
+
+  ul.depth li a:hover {
+    color: $btn-default-font-color-hover;
+  }
+
+  ul.depth li a.selected:hover {
+    color: $btn-selected-font-color-hover;
+  }
+
+  ul.depth li a:active {
+    background-color: $btn-default-background-color-active;
+  }
+
+  /** Files sorting **/
+  .move-up, .move-down {
+    color: $btn-sort-move-font-color;
+  }
+
+  .move-up:hover, .move-down:hover {
+    color: $btn-sort-move-font-color-hover;
+  }
+
+  .move-up:active, .move-down:active {
+    color: $btn-sort-move-font-color-active;
+  }
+
+  li:first-child .move-up, li:last-child .move-down {
+    color: $btn-sort-move-font-color-muted;
+  }
+}
