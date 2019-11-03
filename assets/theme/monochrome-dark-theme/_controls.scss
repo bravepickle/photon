@@ -88,4 +88,25 @@
   li:first-child .move-up, li:last-child .move-down {
     color: $btn-sort-move-font-color-muted;
   }
+
+  //** Header
+  #menu {
+    a, a:visited {
+      color: $menu-link-font-color;
+    }
+
+    a:hover {
+      color: $menu-link-font-color-hover;
+    }
+
+    a:active {
+      color: $menu-link-font-color-active;
+    }
+
+    .themes-container {
+      ul {
+        background-color: $menu-theme-popup-background-color;
+      }
+    }
+  }
 }

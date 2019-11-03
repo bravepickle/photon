@@ -2,7 +2,7 @@
 @import "variables";
 
 .content {
-  /*** Basic ***/
+  ///*** Basic ***/
   button {
     border-radius: $btn-default-border-radius;
     border-width: $btn-default-border-width;
@@ -15,7 +15,7 @@
     cursor: pointer;
   }
 
-  /*** Custom ***/
+  ///*** Custom ***/
   button.app-btn-toggle {
     padding: 1.2rem;
     width: 20rem;
@@ -35,7 +35,7 @@
     margin: 1.5rem;
   }
 
-  /** Style the depth list **/
+  ///** Style the depth list **/
   ul.depth {
     padding: 0.7rem 1rem;
     list-style: none;
@@ -46,13 +46,13 @@
     justify-content: space-around;
   }
 
-  /* Display list items side by side */
+  ///* Display list items side by side */
   ul.depth li {
     font-size: 1.3rem;
     padding: 0.5rem;
   }
 
-  /* Add a color to all links inside the list */
+  ///* Add a color to all links inside the list */
   ul.depth li a {
     text-decoration: none;
     display: inline-block;
@@ -68,7 +68,7 @@
     font-weight: bold;
   }
 
-  /** Files sorting **/
+  ///** Files sorting **/
   .move-up, .move-down {
     font-size: 1.5rem;
     position: absolute;
@@ -89,12 +89,7 @@
     cursor: default;
   }
 
-
-
-
-
   // Header menu
-
   #menu {
     ul {
       list-style: none;
@@ -103,42 +98,29 @@
     .themes-container {
       position: relative;
 
-      a {
-        color: #aacd4e;
-      }
-
       ul {
         position: absolute;
         top: 2rem;
-        //left: 0;
         right: 0;
         width: 12.5rem;
-        //padding: 0;
-        background-color: #4c4c4c;
-        padding: 0.3rem;
+        padding: 0 0.3rem 0.3rem 0.3rem;
         border-radius: 0.2rem;
         box-shadow: 0.2rem 0.2rem 0.5rem black;
       }
 
       .selected {
-        color: #e44816;
-        cursor: default;
+        display: none;
       }
     }
 
     ul.menu-list {
-      padding: 0.7rem 1rem;
+      padding: 0.2rem 0;
       display: flex;
       flex-direction: row;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-
-      li {
-        //border: 1px solid white;
-      }
     }
-
   }
 
 }

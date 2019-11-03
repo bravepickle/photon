@@ -16,6 +16,7 @@ class SiteController extends AbstractController
     const COOKIE_THEME_NAME = 'theme';
 
     const DARK_THEME = 'dark-theme';
+    const INVERTED_DARK_THEME = 'inverted-dark-theme';
     const MONOCHROME_DARK_THEME = 'monochrome-dark-theme';
     const LIGHT_THEME = 'light-theme';
 
@@ -30,6 +31,7 @@ class SiteController extends AbstractController
         // todo: go to src url
         $allowedThemes = [
             self::DARK_THEME,
+            self::INVERTED_DARK_THEME,
             self::MONOCHROME_DARK_THEME,
             self::LIGHT_THEME,
         ];
@@ -78,7 +80,7 @@ class SiteController extends AbstractController
         $skipped = [];
 
         if (is_dir($baseDir)) {
-            $directoryObjs = $finder->in($baseDir)->sortByName()->directories();
+            $directoryObjs = $finder->in($baseDir)->sortByName()->directories()->depth('< 2');
             /** @var SplFileInfo $directoryObj */
             foreach ($directoryObjs as $directoryObj) {
 //                $link = '/' . $directoryObj->getRelativePathname();
@@ -135,13 +137,15 @@ class SiteController extends AbstractController
 
         $themeIconsMap = [
             self::DARK_THEME => 'fas fa-moon',
+            self::INVERTED_DARK_THEME => 'fas fa-cloud-moon',
             self::LIGHT_THEME => 'fas fa-sun',
-            self::MONOCHROME_DARK_THEME => 'fas fa-cloud-moon',
+            self::MONOCHROME_DARK_THEME => 'fas fa-adjust',
         ];
 
         $themeLabelsMap = [
             self::DARK_THEME => 'Dark',
             self::LIGHT_THEME => 'Light',
+            self::INVERTED_DARK_THEME => 'Inverted Dark',
             self::MONOCHROME_DARK_THEME => 'Monochrome dark',
         ];
 
