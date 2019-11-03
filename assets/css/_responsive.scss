@@ -2,30 +2,13 @@
 @import "variables";
 
 @media screen and (max-width: 60rem) {
-//@media screen and (max-width: 600px) {
-//  .content #menu .themes-container {
-//    left: -0.5rem;
-//  }
   .content {
     padding: 0 0.5rem;
   }
 }
 
 @media screen and (max-width: 500px) {
-  //body {
-  //  font-size: $default-font-size-min;
-  //}
-
   body .content {
-    //* {
-    //  font-size: $default-font-size-min;
-    //}
-
-    //#menu .themes-container {
-    //  left: -8pt;
-    //  //padding-right: 14pt;
-    //}
-
     .btn-group button {
       width: 40%;
       margin: 0.5rem;
