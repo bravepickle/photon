@@ -8,16 +8,14 @@
 (function () {
     'use strict';
 
-    // any CSS you require will output into a single css file (app.css in this case)
-    require('../css/app.css');
-
-    // require('@fortawesome/fontawesome-free/css/all.css');
-    require('@fortawesome/fontawesome-free/css/fontawesome.css');
-    require('@fortawesome/fontawesome-free/css/solid.css');
-    // require('@fortawesome/fontawesome-free/css/solid.js');
-
-    require('photoswipe/dist/photoswipe.css');
-    require('photoswipe/dist/default-skin/default-skin.css');
+    // any CSS you require will output into a single css file (app.scss in this case)
+    require('../css/app.scss');
+    //
+    // require('@fortawesome/fontawesome-free/css/fontawesome.css');
+    // require('@fortawesome/fontawesome-free/css/solid.css');
+    //
+    // require('photoswipe/dist/photoswipe.css');
+    // require('photoswipe/dist/default-skin/default-skin.css');
 
     let PhotoSwipe = require('photoswipe');
     let PhotoSwipeUI_Default = require('photoswipe/dist/photoswipe-ui-default');

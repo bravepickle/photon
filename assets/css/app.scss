@@ -1,0 +1,250 @@
+@import "vendors";
+@import "variables";
+@import "layout";
+@import "controls";
+
+// layout defaults
+body {
+  font-family: $default-font-family;
+  color: $default-font-color;
+  font-size: $default-font-size;
+  background-color: $default-background-color;
+}
+
+// content block defaults
+.content {
+  margin: auto;
+  max-width: 60rem;
+  //font-family: $default-font-family;
+  //color: $default-font-color;
+  //font-size: $default-font-size;
+  //background-color: $default-background-color;
+
+  a {
+    color: $link-default-font-color;
+    text-decoration: $link-default-decoration;
+  }
+
+  a:hover {
+    color: $link-default-font-color-hover;
+    text-decoration: $link-default-decoration;
+  }
+
+  * {
+    font-family: $default-font-family;
+  }
+
+  button {
+    color: $btn-default-font-color;
+    background-color: $btn-default-background-color;
+    border-radius: $btn-default-border-radius;
+    border-width: $btn-default-border-width;
+    padding: $btn-default-padding;
+    vertical-align: center;
+    font-size: $btn-default-font-size;
+  }
+
+  button:hover {
+    cursor: pointer;
+    color: $btn-default-font-color-hover;
+  }
+
+  button:active {
+    background-color: $btn-default-background-color-active;
+  }
+
+  a:visited, a.visited {
+    color: $link-default-font-color-visited;
+  }
+
+  li {
+    padding: 0.2rem 0;
+  }
+
+  #files_list.hidden {
+    display: none;
+  }
+
+  //header h1 a {
+  //  color: #0C74BA;
+  //}
+
+  header img.img-logo {
+    position: relative;
+    top: 0.5rem;
+  }
+
+  .btn-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .btn-group button {
+    width: 30%;
+    min-width: 10rem;
+    height: 5rem;
+    margin: 1.5rem;
+  }
+
+  /*** Navigation ***/
+
+  /* Style the list */
+  .breadcrumbs ul {
+    padding: 0.7rem 1rem;
+    list-style: none;
+    background-color: $breadcrumbs-background-color;
+  }
+
+  /* Display list items side by side */
+  .breadcrumbs ul li {
+    display: inline;
+    font-size: 1.3rem;
+  }
+
+  /* Add a slash symbol (/) before/behind each list item */
+  .breadcrumbs ul li + li:before {
+    padding: 0.4rem;
+    color: $breadcrumbs-font-color;
+    content: "/\00a0";
+  }
+
+  /* Add a color to all links inside the list */
+  .breadcrumbs ul li a {
+    color: $breadcrumbs-link-font-color;
+    //text-decoration: none;
+  }
+
+  /* Add a color on mouse-over */
+  .breadcrumbs ul li a:hover {
+    color: $breadcrumbs-link-font-color-hover;
+    //text-decoration: underline;
+  }
+
+  //.content #folders_list a:visited, .content #folders_list a.visited {
+  //  color: $link-default-font-color-visited;
+  //}
+
+  /** Style the depth list **/
+  ul.depth {
+    padding: 0.7rem 1rem;
+    list-style: none;
+    /*background-color: #4c4c4c;*/
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    /*justify-content: space-between;*/
+    justify-content: space-around;
+  }
+
+  /* Display list items side by side */
+  ul.depth li {
+    /*display: inline-block;*/
+    /*display: inline;*/
+    font-size: 1.3rem;
+    padding: 0.5rem;
+  }
+
+  /* Add a slash symbol (/) before/behind each list item */
+  /*.content ul.depth li+li:before {*/
+  /*padding: 8px;*/
+  /*color: #F0FFF0;*/
+  /*content: "/\00a0";*/
+  /*}*/
+
+  /* Add a color to all links inside the list */
+  ul.depth li a {
+    color: $btn-default-font-color;
+    text-decoration: none;
+    display: inline-block;
+    width: 20%;
+    min-width: 10rem;
+    padding: 0.5rem;
+    text-align: center;
+    vertical-align: auto;
+    border-radius: 0.3rem;
+    background-color: $btn-default-background-color;
+    /*vertical-align: center;*/
+  }
+
+  ul.depth li a.selected, .visits-btn.selected {
+    font-weight: bold;
+    color: $btn-selected-font-color;
+    background-color: $btn-selected-background-color;
+  }
+
+  /* Add a color on mouse-over */
+  ul.depth li a:hover {
+    color: $btn-default-font-color;
+    //text-decoration: none;
+  }
+
+  ul.depth li a.selected:hover {
+    color: $btn-selected-font-color-hover;
+  }
+
+  #files_list ul {
+    padding-left: 5rem;
+  }
+
+  #files_list li {
+    position: relative;
+  }
+
+  #files_list li, #folders_list li {
+    list-style: none;
+  }
+
+  .move-up, .move-down {
+    font-size: 1.5rem;
+    position: absolute;
+    top: 0.2rem;
+    margin: 0 0.2rem;
+    color: $btn-sort-move-font-color;
+    cursor: pointer;
+  }
+
+  .move-up:hover, .move-down:hover {
+    color: $btn-sort-move-font-color-hover;
+  }
+
+  .move-up:active, .move-down:active {
+    color: $btn-sort-move-font-color-active;
+  }
+
+  .move-up {
+    left: -4.6rem;
+  }
+
+  .move-down {
+    left: -2.4rem;
+  }
+
+  li:first-child .move-up, li:last-child .move-down {
+    color: $btn-sort-move-font-color-muted;
+    cursor: default;
+  }
+}
+
+
+@media screen and (max-width: 500px) {
+  .content {
+    .btn-group button {
+      width: 40%;
+      margin: 0.5rem;
+      padding: 0.5rem;
+    }
+
+    button.app-btn-toggle {
+      padding: 1.2rem;
+      height: 5rem;
+    }
+  }
+}
+
+
+
+
+/*TODO: night and day color themes*/

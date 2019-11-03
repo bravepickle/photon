@@ -1,0 +1,42 @@
+// styles for controls
+@import "variables";
+
+.content {
+  button.app-btn {
+    color: $btn-default-font-color;
+    background: $btn-primary-background-color;
+  }
+
+  button.app-btn:hover {
+    color: $btn-primary-font-color-hover;
+  }
+
+  button.del-btn {
+    color: $btn-alert-font-color;
+    background: $btn-alert-background-color;
+    border-radius: 5px;
+    font-size: 1.2rem;
+  }
+
+  button.visits-btn {
+    color: $btn-default-font-color;
+    background: $btn-default-background-color;
+    border-radius: 5px;
+    font-size: 1.2rem;
+  }
+
+  button.app-btn-toggle {
+    color: $btn-secondary-font-color;
+    background: $btn-secondary-background-color;
+    padding: 1.2rem;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    width: 20rem;
+    margin: 1.5rem;
+  }
+
+  //a.selected {
+  //  font-weight: bold;
+  //  color: #B0413E;
+  //}
+}
