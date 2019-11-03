@@ -1,0 +1,15 @@
+// Responsive layout & controls
+@media screen and (max-width: 500px) {
+  .content {
+    .btn-group button {
+      width: 40%;
+      margin: 0.5rem;
+      padding: 0.5rem;
+    }
+
+    button.app-btn-toggle {
+      padding: 1.2rem;
+      height: 5rem;
+    }
+  }
+}

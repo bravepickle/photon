@@ -8,10 +8,8 @@
         <link rel="apple-touch-icon" href="{{ asset('/apple-touch-favicon.png') }}"/>
 
         {% block stylesheets %}
-            {#should be loaded via js#}
             <link href="{{ asset('build/app.css') }}" rel="stylesheet"/>
-            {#<link href="{{ asset('build/vendors~app.css') }}" rel="stylesheet"/>#}
-            {#<link href="https://fonts.googleapis.com/css?family=Raleway&display=swap" rel="stylesheet">#}
+            <link href="{{ asset('build/vendors~app.css') }}" rel="stylesheet"/>
         {% endblock %}
     </head>
     <body>

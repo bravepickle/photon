@@ -1,0 +1,95 @@
+// basic layout styles
+
+@import "variables";
+
+body {
+  font-family: $default-font-family;
+  color: $default-font-color;
+  font-size: $default-font-size;
+  background-color: $default-background-color;
+}
+
+.content {
+  margin: auto;
+  max-width: 60rem;
+
+  /*** Basic ***/
+  * {
+    font-family: $default-font-family;
+  }
+
+  a {
+    color: $link-default-font-color;
+    text-decoration: $link-default-decoration;
+  }
+
+  a:visited, a.visited {
+    color: $link-default-font-color-visited;
+  }
+
+  a:hover {
+    color: $link-default-font-color-hover;
+    text-decoration: $link-default-decoration;
+  }
+
+  a:active {
+    color: $link-default-font-color-active;
+  }
+
+  li {
+    padding: 0.2rem 0;
+  }
+
+  /*** Page header ***/
+  header img.img-logo {
+    position: relative;
+    top: 0.5rem;
+  }
+
+  /*** Breadcrumbs ***/
+  .breadcrumbs ul {
+    padding: 0.7rem 1rem;
+    list-style: none;
+    background-color: $breadcrumbs-background-color;
+  }
+
+  /* Display list items side by side */
+  .breadcrumbs ul li {
+    display: inline;
+    font-size: 1.3rem;
+  }
+
+  /* Add a slash symbol (/) before/behind each list item */
+  .breadcrumbs ul li + li:before {
+    padding: 0.4rem;
+    color: $breadcrumbs-font-color;
+    content: "/\00a0";
+  }
+
+  /* Add a color to all links inside the list */
+  .breadcrumbs ul li a {
+    color: $breadcrumbs-link-font-color;
+  }
+
+  /* Add a color on mouse-over */
+  .breadcrumbs ul li a:hover {
+    color: $breadcrumbs-link-font-color-hover;
+  }
+
+  /*** Custom ***/
+  #files_list.hidden {
+    display: none;
+  }
+
+  #files_list ul {
+    padding-left: 5rem;
+  }
+
+  #files_list li {
+    position: relative;
+  }
+
+  #files_list li, #folders_list li {
+    list-style: none;
+  }
+}
