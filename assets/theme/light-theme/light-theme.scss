@@ -1,2 +1,7 @@
 @import "layout";
 @import "controls";
+
+// PhotoSwipe adjustments
+body .pswp__bg {
+  background-color: white;
+}

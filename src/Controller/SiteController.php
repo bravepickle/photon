@@ -16,7 +16,6 @@ class SiteController extends AbstractController
     const COOKIE_THEME_NAME = 'theme';
 
     const DARK_THEME = 'dark-theme';
-    const INVERTED_DARK_THEME = 'inverted-dark-theme';
     const MONOCHROME_DARK_THEME = 'monochrome-dark-theme';
     const LIGHT_THEME = 'light-theme';
 
@@ -31,7 +30,6 @@ class SiteController extends AbstractController
         // todo: go to src url
         $allowedThemes = [
             self::DARK_THEME,
-            self::INVERTED_DARK_THEME,
             self::MONOCHROME_DARK_THEME,
             self::LIGHT_THEME,
         ];
@@ -39,9 +37,6 @@ class SiteController extends AbstractController
         if (!in_array($name, $allowedThemes)) {
             throw new BadRequestHttpException('Unknown theme was selected: ' . $name);
         }
-
-//        var_dump($name);
-//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
 
         $response = $this->redirectToRoute('site', ['path' => $request->query->getAlpha('url')]);
         $response->headers->setCookie(Cookie::create(self::COOKIE_THEME_NAME, $name, '+3 months'));
@@ -83,7 +78,6 @@ class SiteController extends AbstractController
             $directoryObjs = $finder->in($baseDir)->sortByName()->directories()->depth('< 2');
             /** @var SplFileInfo $directoryObj */
             foreach ($directoryObjs as $directoryObj) {
-//                $link = '/' . $directoryObj->getRelativePathname();
                 $link = $linkBase . '/' . $directoryObj->getRelativePathname();
                 $directories[$link] = $pubFolder . '/' . $directoryObj->getRelativePathname();
             }
@@ -93,7 +87,6 @@ class SiteController extends AbstractController
             }
 
             $fileObjs = $finder->in($baseDir)->sortByName()->files();
-//            $files = $finder->in($baseDir)->sortByName()->files()->name(['*.jpeg', '*.jpg', '*.gif', '*.png', '*.svg']);
 
             /** @var SplFileInfo $fileObj */
             foreach ($fileObjs as $fileObj) {
@@ -129,15 +122,10 @@ class SiteController extends AbstractController
 
         $breadcrumbs = $this->buildBreadcrumbs($pubFolder);
 
-//        echo '<pre>';
-//        var_dump($request->cookies->get(self::COOKIE_THEME_NAME, self::DARK_THEME));
-//        die("\n" . __METHOD__ . ":" . __FILE__ . ":" . __LINE__ . "\n");
-
         $theme = $request->cookies->get(self::COOKIE_THEME_NAME, self::DARK_THEME);
 
         $themeIconsMap = [
             self::DARK_THEME => 'fas fa-moon',
-            self::INVERTED_DARK_THEME => 'fas fa-cloud-moon',
             self::LIGHT_THEME => 'fas fa-sun',
             self::MONOCHROME_DARK_THEME => 'fas fa-adjust',
         ];
@@ -145,7 +133,6 @@ class SiteController extends AbstractController
         $themeLabelsMap = [
             self::DARK_THEME => 'Dark',
             self::LIGHT_THEME => 'Light',
-            self::INVERTED_DARK_THEME => 'Inverted Dark',
             self::MONOCHROME_DARK_THEME => 'Monochrome dark',
         ];
 
