@@ -66,6 +66,10 @@
     margin: 1.5rem;
   }
 
+  .btn-group button:active {
+    background-color: $btn-default-background-color-active;
+  }
+
   /** Style the depth list **/
   ul.depth {
     padding: 0.7rem 1rem;
@@ -109,6 +113,10 @@
 
   ul.depth li a.selected:hover {
     color: $btn-selected-font-color-hover;
+  }
+
+  ul.depth li a:active {
+      background-color: $btn-default-background-color-active;
   }
 
   /** Files sorting **/

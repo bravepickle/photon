@@ -1,51 +1,21 @@
 // Common variables & defaults
 //noinspection CssUnknownTarget
 @import url(https://fonts.googleapis.com/css?family=Raleway&display=swap);
+@import "monochrome-dark-theme";
+//@import "inverted-dark-theme";
+//@import "dark-theme";
+//@import "light-theme";
 
 // basic defaults
 $default-font-size: 1.2rem;
 $default-font-family: 'Raleway', sans-serif;
-$default-font-color: #F0FFF0;
-$default-background-color: #313131;
 
-$link-default-font-color: #0C74BA;
-$link-default-font-color-visited: #0c5c9a;
-$link-default-font-color-hover: #0c93d9;
-$link-default-font-color-active: #07577d;
 $link-default-decoration: none;
 
 // buttons
-$btn-primary-background-color: #85cb2b;
-$btn-primary-font-color-hover: #6b6b6b;
-
 $btn-default-border-radius: 0.2rem;
 $btn-default-border-width: 0;
 $btn-default-padding: 1rem;
 $btn-default-font-size: $default-font-size;
-$btn-default-font-color: black;
-$btn-default-font-color-hover: #c9c9c9;
-$btn-default-background-color: #7e3f2c;
-$btn-default-background-color-active: #9a9a9a;
 
-$btn-alert-font-color: $btn-default-font-color;
-$btn-alert-background-color: #ff6033;
-
-$btn-secondary-font-color: $btn-default-font-color;
-$btn-secondary-background-color: #0C74BA;
-
-$btn-selected-font-color: $btn-default-font-color;
-$btn-selected-font-color-hover: #313131;
-$btn-selected-background-color: coral;
-
-$btn-sort-move-font-color: #5fb689;
-$btn-sort-move-font-color-hover: #68c194;
-$btn-sort-move-font-color-active: #7ad6a7;
-$btn-sort-move-font-color-muted: #9f9f9f;
-
-// breadcrumbs
-$breadcrumbs-font-color: $default-font-color;
-$breadcrumbs-background-color: #4c4c4c;
-$breadcrumbs-link-font-color: #0275d8;
-$breadcrumbs-link-font-color-hover: #01447e;
-$breadcrumbs-link-font-color-active: $link-default-font-color-active;
 

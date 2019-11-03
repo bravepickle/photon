@@ -57,6 +57,7 @@ body {
   .breadcrumbs ul li {
     display: inline;
     font-size: 1.3rem;
+    color: $breadcrumbs-font-color;
   }
 
   /* Add a slash symbol (/) before/behind each list item */

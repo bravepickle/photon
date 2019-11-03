@@ -1,42 +1,42 @@
-// Variables & special styles for dark theme
+// Default color theme for layout when none were set
 
 // basic defaults
 $default-font-color: #F0FFF0;
 $default-background-color: #313131;
 
-$link-default-font-color: #0C74BA;
-$link-default-font-color-visited: #0c5c9a;
-$link-default-font-color-hover: #0c93d9;
-$link-default-font-color-active: #07577d;
+$link-default-font-color: #b8b8b8;
+$link-default-font-color-visited: #999999;
+$link-default-font-color-hover: #d9d9d9;
+$link-default-font-color-active: #7d7d7d;
 
 // buttons
-$btn-primary-background-color: #85cb2b;
+$btn-primary-background-color: #c9c9c9;
 $btn-primary-font-color-hover: #6b6b6b;
 
 $btn-default-font-color: black;
 $btn-default-font-color-hover: #c9c9c9;
-$btn-default-background-color: #7e3f2c;
+$btn-default-background-color: #7d7d7d;
 $btn-default-background-color-active: #9a9a9a;
 
 $btn-alert-font-color: $btn-default-font-color;
-$btn-alert-background-color: #ff6033;
+$btn-alert-background-color: #ffffff;
 
 $btn-secondary-font-color: $btn-default-font-color;
-$btn-secondary-background-color: #0C74BA;
+$btn-secondary-background-color: #b8b8b8;
 
 $btn-selected-font-color: $btn-default-font-color;
 $btn-selected-font-color-hover: #313131;
-$btn-selected-background-color: coral;
+$btn-selected-background-color: #ffffff;
 
-$btn-sort-move-font-color: #5fb689;
-$btn-sort-move-font-color-hover: #68c194;
-$btn-sort-move-font-color-active: #7ad6a7;
+$btn-sort-move-font-color: #b5b5b5;
+$btn-sort-move-font-color-hover: #bfbfbf;
+$btn-sort-move-font-color-active: #d4d4d4;
 $btn-sort-move-font-color-muted: #9f9f9f;
 
 // breadcrumbs
 $breadcrumbs-font-color: $default-font-color;
 $breadcrumbs-background-color: #4c4c4c;
-$breadcrumbs-link-font-color: #0275d8;
-$breadcrumbs-link-font-color-hover: #01447e;
+$breadcrumbs-link-font-color: #d6d6d6;
+$breadcrumbs-link-font-color-hover: #7d7d7d;
 $breadcrumbs-link-font-color-active: $link-default-font-color-active;
 

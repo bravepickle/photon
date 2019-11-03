@@ -1,0 +1,42 @@
+// Variables & special styles for inverted dark theme
+
+// basic defaults
+$default-font-color: #0f000f;
+$default-background-color: #cecece;
+
+$link-default-font-color: #f38b45;
+$link-default-font-color-visited: #f3a365;
+$link-default-font-color-hover: #f36c26;
+$link-default-font-color-active: #f8a882;
+
+// buttons
+$btn-primary-background-color: #7a34d4;
+$btn-primary-font-color-hover: #949494;
+
+$btn-default-font-color: white;
+$btn-default-font-color-hover: #363636;
+$btn-default-background-color: #81c0d3;
+$btn-default-background-color-active: #656565;
+
+$btn-alert-font-color: $btn-default-font-color;
+$btn-alert-background-color: #009fcc;
+
+$btn-secondary-font-color: $btn-default-font-color;
+$btn-secondary-background-color: #f38b45;
+
+$btn-selected-font-color: $btn-default-font-color;
+$btn-selected-font-color-hover: #cecece;
+$btn-selected-background-color: #0080af;
+
+$btn-sort-move-font-color: #a04976;
+$btn-sort-move-font-color-hover: #973e6b;
+$btn-sort-move-font-color-active: #852958;
+$btn-sort-move-font-color-muted: #606060;
+
+// breadcrumbs
+$breadcrumbs-font-color: $default-font-color;
+$breadcrumbs-background-color: #b3b3b3;
+$breadcrumbs-link-font-color: #fd8a27;
+$breadcrumbs-link-font-color-hover: #febb81;
+$breadcrumbs-link-font-color-active: $link-default-font-color-active;
+
