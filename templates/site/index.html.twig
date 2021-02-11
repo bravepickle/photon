@@ -188,7 +188,7 @@
 {% block javascripts %}
 <script type="text/javascript">
     window.slides = {{ slides | json_encode | raw }};
-    window.currentPath = {{ path | escape('js') }};
+    window.currentPath = {{ path | json_encode | raw }};
 </script>
 
 {{ parent() }}
