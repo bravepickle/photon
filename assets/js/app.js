@@ -286,7 +286,7 @@
             });
         }
 
-        let toggleBtns = document.getElementsByClassName('app-btn-toggle');
+        let toggleBtns = document.querySelectorAll('.app-btn-toggle');
 
         toggleBtns.forEach(function (btn) {
             btn.addEventListener('click', function () {

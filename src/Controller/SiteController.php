@@ -52,7 +52,12 @@ class SiteController extends AbstractController
      */
     public function index(string $path, Request $request)
     {
-        $pubFolder = rtrim('/storage/' . $path, '/');
+        $pubFolder = rtrim($this->getParameter('app_storage_public_path'), '/');
+
+        if ($path) {
+            $pubFolder .= '/' . rtrim($path, '/');
+        }
+
         $baseDir = $this->getParameter('kernel.project_dir') . '/public' . $pubFolder;
 
         if (!is_dir($baseDir)) { // base dir for files not found
@@ -79,7 +84,8 @@ class SiteController extends AbstractController
             /** @var SplFileInfo $directoryObj */
             foreach ($directoryObjs as $directoryObj) {
                 $link = $linkBase . '/' . $directoryObj->getRelativePathname();
-                $directories[$link] = $pubFolder . '/' . $directoryObj->getRelativePathname();
+//                $directories[$link] = $pubFolder . '/' . $directoryObj->getRelativePathname();
+                $directories[$link] = $directoryObj->getRelativePathname();
             }
 
             if ($depth > 0) {

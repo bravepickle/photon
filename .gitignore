@@ -6,6 +6,7 @@
 /var/
 /vendor/
 /public/storage/
+!/public/storage/.gitkeep
 ###< symfony/framework-bundle ###
 ###> symfony/web-server-bundle ###
 /.web-server-pid
