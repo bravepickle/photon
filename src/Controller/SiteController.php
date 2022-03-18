@@ -114,17 +114,18 @@ class SiteController extends AbstractController
                             'h' => $size[1],
                             'title' => $fileObj->getFilename(),
                         ];
+
+                        $files[$src] = $fileObj->getRelativePathname();
                         break;
                     default:
-                        $skipped[] = $src;
+                        $skipped[$src] = $fileObj->getRelativePathname();
                 }
-
-                $files[$src] = $src; // we need it only for debug now
             }
         }
 
         ksort($slides);
-        sort($files);
+        asort($files);
+        asort($skipped);
 
         $breadcrumbs = $this->buildBreadcrumbs($pubFolder);
 
