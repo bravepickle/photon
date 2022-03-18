@@ -150,7 +150,7 @@
 
     let fileEls;
 
-    fileEls = document.querySelectorAll('#files_list li');
+    fileEls = document.querySelectorAll('#files_list .items_list li');
 
     if (fileEls !== null && fileEls.length > 0) {
         // fileEls[1].querySelector('.move-up').classList.add('hidden');

@@ -62,7 +62,7 @@ body {
     display: none;
   }
 
-  #files_list ul {
+  #files_list .items_list {
     padding-left: 5rem;
   }
 
@@ -72,5 +72,21 @@ body {
 
   #files_list li, #folders_list li {
     list-style: none;
+  }
+
+  .legend {
+    font-size: 0.7em;
+  }
+
+  .legend_info {
+    padding-left: 1em;
+  }
+
+  #sort_pattern {
+    font-size: 0.85em;
+  }
+
+  .apply-sort-btn {
+    padding: 0.7em;
   }
 }
