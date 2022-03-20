@@ -85,49 +85,35 @@
     </div>
 
     {% if files | length > 0 %}
-        <div id="files_list" class="hidden">
-            <h2>Files in folder</h2>
-            <fieldset>
-                <legend>Select sorting pattern</legend>
-                <select id="sort_pattern_sel">
-                    <option value="">-- custom --</option>
-                    <option value="(?<alpha>.+)\.(?<ext>.{2,4})" selected>{alpha}.{ext}</option>
-                    <option value="(?<alpha>.+?)(?<num>\d+)\.(?<ext>.{2,4})">{alpha}{num}.{ext}</option>
-                    <option value="(?<alpha2>.+?)(?<num>\d+)\.(?<ext>.{2,4})">{alpha2}{num.{ext}}</option>
-                    <option value="(?<num>\d+)\.(?<ext>.{2,4})">{num}.{ext}</option>
-                    <option value="(?<blob>.+?)(?<num>\d+)\.(?<ext>.{2,4})">{blob}{num}.{ext}</option>
-                    <option value="(?<num>\d+)(?<blob>.+)\.(?<ext>.{2,4})">{num}{blob}.{ext}</option>
-                    <option value="(?<blob>.+)-(?<alpha>.+)\.(?<ext>.{2,4})">{blob}-{alpha}.{ext}</option>
-                    <option value="(?<num>\d+)-(?<num2>\d+)\.(?<ext>.{2,4})">{num}-{num2}.{ext}</option>
-                    <option value="(?<num2>\d+)-(?<num>\d+)\.(?<ext>.{2,4})">{num2}-{num}.{ext}</option>
-                </select>
-                <input id="sort_custom" placeholder="Type here...">
-{#                <input id="sort_regex_flags" placeholder="Regex flags" value="U">#}
-{#                <input id="sort_custom" hidden placeholder="Type here...">#}
-{#                <div class="legend_wrapper">#}
-{#                    <input id="toggle_sort_legend_btn" type="button" value="Toggle legend">#}
+    <div id="files_list" class="hidden">
+        <h2>Files in folder</h2>
+        <fieldset>
+            <legend>Select sorting pattern</legend>
+            <select id="sort_pattern_sel">
+                <option value="">-- custom --</option>
+                <option value="(?<alpha>.+)\.(?<ext>.{2,4})" selected>{alpha}.{ext}</option>
+                <option value="(?<alpha>.+?)(?<num>\d+)\.(?<ext>.{2,4})">{alpha}{num}.{ext}</option>
+                <option value="(?<alpha2>.+?)(?<num>\d+)\.(?<ext>.{2,4})">{alpha2}{num.{ext}}</option>
+                <option value="(?<num>\d+)\.(?<ext>.{2,4})">{num}.{ext}</option>
+                <option value="(?<blob>.+?)(?<num>\d+)\.(?<ext>.{2,4})">{blob}{num}.{ext}</option>
+                <option value="(?<num>\d+)(?<blob>.+)\.(?<ext>.{2,4})">{num}{blob}.{ext}</option>
+                <option value="(?<blob>.+)-(?<alpha>.+)\.(?<ext>.{2,4})">{blob}-{alpha}.{ext}</option>
+                <option value="(?<num>\d+)-(?<num2>\d+)\.(?<ext>.{2,4})">{num}-{num2}.{ext}</option>
+                <option value="(?<num2>\d+)-(?<num>\d+)\.(?<ext>.{2,4})">{num2}-{num}.{ext}</option>
+            </select>
+            <input id="sort_custom" placeholder="Type here...">
+            <div>
+                <input type="checkbox" id="sort_reverse_input"> <label for="sort_reverse_input">Reverse order</label>
+            </div>
+            <button class="apply-sort-btn" id="apply_sort_btn">Apply</button>
+        </fieldset>
 
-{#                    <div id="legend" hidden>#}
-{#                        <h4>Legend</h4>#}
-{#                        <ul class="legend_info">#}
-{#                            <li><code>{blob}</code> - unrelated to sorting content</li>#}
-{#                            <li><code>{alpha}</code> - sort as string</li>#}
-{#                            <li><code>{alpha2}</code> - sort as string with lower priority</li>#}
-{#                            <li><code>{num}</code> - sort as integers</li>#}
-{#                            <li><code>{num2}</code> - sort as integers with lower priority</li>#}
-{#                            <li><code>{ext}</code> - file extension
-{#                        </ul>#}
-{#                    </div>#}
-                </div>
-                <button class="apply-sort-btn" id="apply_sort_btn">Apply</button>
-            </fieldset>
-
-            <ul class="items_list">
-                {% for path, file in files %}
-                    <li><i title="Move up" class="fas fa-arrow-circle-up move-up"></i> <i title="Move down" class="fas fa-arrow-circle-down move-down"></i><a href="{{ path }}">{{ file }}</a></li>
-                {% endfor %}
-            </ul>
-        </div>
+        <ul class="items_list">
+            {% for path, file in files %}
+                <li><i title="Move up" class="fas fa-arrow-circle-up move-up"></i> <i title="Move down" class="fas fa-arrow-circle-down move-down"></i><a href="{{ path }}">{{ file }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
     {% endif %}
 
     {% if directories | length > 0 %}

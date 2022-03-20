@@ -149,12 +149,11 @@
     };
 
     let fileEls;
+    let fileListContainer = document.querySelector('#files_list .items_list');
 
-    fileEls = document.querySelectorAll('#files_list .items_list li');
+    fileEls = fileListContainer.querySelectorAll('li');
 
     if (fileEls !== null && fileEls.length > 0) {
-        // fileEls[1].querySelector('.move-up').classList.add('hidden');
-
         fileEls.forEach(function (listEl) {
             let downEl, upEl;
             downEl = listEl.querySelector('.move-down');
@@ -180,38 +179,10 @@
 
                 if (wrapper.previousElementSibling) {
                     wrapper.parentNode.insertBefore(wrapper, wrapper.previousElementSibling);
-                // } else {
-                //     if (wrapper.nextSibling) {
-                //         wrapper.querySelector('.move-down').classList.remove('hidden');
-                //     }
-                //
-                //     this.classList.add('hidden');
                 }
             });
-
-            // downEl.addEventListener('click', function () {
-            //     if (this.classList.contains('hidden')) {
-            //         return;
-            //     }
-            //
-            //     let listParent;
-            //     listParent = listEl.parentNode;
-            // });
         });
-
-        // fileEls[fileEls.length - 1].querySelector('.move-down').classList.add('hidden');
     }
-
-
-    // let fileEls;
-
-    // fileEls = document.querySelectorAll('#file_list li');
-    //
-    // if (fileLinks !== null) {
-    //     fileLinks.forEach(function(linkEl) {
-    //         linkEl.addEventListener('click')
-    //     });
-    // }
 
     window.addEventListener('load', function () {
         let viewBtn = document.getElementById('view_images_btn');
@@ -322,36 +293,17 @@
         let sortFilesBtn = document.getElementById('apply_sort_btn');
         let sortSelector = document.getElementById('sort_pattern_sel');
         let sortCustomInput = document.getElementById('sort_custom');
-        // let sortRegexFlags = document.getElementById('sort_regex_flags');
-        // let sortToggleLegendBtn = document.getElementById('toggle_sort_legend_btn');
-        // let legendBlock = document.getElementById('legend');
+        let sortReverseInput = document.getElementById('sort_reverse_input');
 
         sortCustomInput.value = sortSelector.value;
 
-        // sortToggleLegendBtn.addEventListener('click', function () {
-        //     legendBlock.hidden = !legendBlock.hidden;
-        // });
-
         sortSelector.addEventListener('change', function () {
-            // sortCustomInput.hidden = '' !== sortSelector.value;
             sortCustomInput.value = sortSelector.value;
         });
 
-        // let sortMasks = ['{num}', '{string}', '{num2}', '{string2}', '{blob}'];
-        let sortGroups = ['num', 'string', 'num2', 'string2', 'blob', 'ext'];
-
         function getSortValues(value, format) {
-            let foundMasks;
-            foundMasks = new Map();
-
-            let maskPriority = new Map();
-
-            // let regExp = new RegExp(format, sortRegexFlags.value);
             let regExp = new RegExp(format);
             let matched = regExp.exec(value);
-
-            console.info('--- Values', format, value, matched);
-
             let values = [];
 
             if (matched.groups) {
@@ -382,119 +334,75 @@
                 }
             }
 
-            // sortMasks.forEach(function (mask) {
-            //     let formatIdx = format.indexOf(mask);
-            //     if (formatIdx != -1) {
-            //         maskPriority.set(mask, formatIdx);
-            //
-            //
-            //     }
-            // });
-
-
-
-            // sortMasks.sort(function(a, b) {
-            //     if (a.)
-            // });
-
-            console.info('Parsed values', values);
-
             return values;
-            // return foundMasks;
+        }
+
+        /**
+         * @param a {object}
+         * @param b {object}
+         * @param format {string}
+         * @param reverse {boolean}
+         * @returns {number|number}
+         */
+        function sortSlidesCallback(a, b, format, reverse) {
+            let aWeight = getSortValues(a.title, format);
+            let bWeight = getSortValues(b.title, format);
+
+            if (aWeight.length >= bWeight.length) {
+                for (let i = 0; i < aWeight.length; i++) {
+                    if (typeof bWeight[i] === 'undefined') {
+                        return !reverse ? 1 : -1;
+                    }
+
+                    if (aWeight[i] > bWeight[i]) {
+                        return !reverse ? 1 : -1;
+                    }
+
+                    if (aWeight[i] < bWeight[i]) {
+                        return !reverse ? -1 : 1;
+                    }
+                }
+            } else {
+                for (let i = 0; i < bWeight.length; i++) {
+                    if (typeof aWeight[i] === 'undefined') {
+                        return !reverse ? 1 : -1;
+                    }
+
+                    if (aWeight[i] > bWeight[i]) {
+                        return !reverse ? 1 : -1;
+                    }
+
+                    if (aWeight[i] < bWeight[i]) {
+                        return !reverse ? -1 : 1;
+                    }
+                }
+            }
+
+            return 0;
         }
 
         /**
          *
          * @param format {string}
          * @param currentSlides {Array}
+         * @param reverse {boolean}
          * @returns {*[]}
          */
-        function sortByFormat(format, currentSlides) {
-            // let sortedSlides = [];
-
+        function sortByFormat(format, currentSlides, reverse) {
             let sortedSlides = currentSlides.sort(function (a, b) {
-                let aWeight = getSortValues(a.title, format);
-                let bWeight = getSortValues(b.title, format);
-
-                console.log('sort values', aWeight, bWeight);
-
-                if (aWeight.length >= bWeight.length) {
-                    for (let i = 0; i < aWeight.length; i++) {
-                        if (typeof bWeight[i] === 'undefined') {
-                            return 1;
-                        }
-
-                        if (aWeight[i] > bWeight[i]) {
-                            return 1;
-                        }
-
-                        if (aWeight[i] < bWeight[i]) {
-                            return -1;
-                        }
-                    }
-                } else {
-                    for (let i = 0; i < bWeight.length; i++) {
-                        if (typeof aWeight[i] === 'undefined') {
-                            return 1;
-                        }
-
-                        if (aWeight[i] > bWeight[i]) {
-                            return 1;
-                        }
-
-                        if (aWeight[i] < bWeight[i]) {
-                            return -1;
-                        }
-                    }
-                }
-
-                return 0;
+                return sortSlidesCallback(a, b, format, reverse);
             });
 
-            // currentSlides.forEach(function (item) {
-            //
-            // });
-            // let sortedFileEls;
-            // sortedFileEls = document.querySelectorAll('#files_list a');
-            //
-            // if (sortedFileEls !== null && sortedFileEls.length > 0) {
-            //     let sortedLinks = [];
-            //     sortedFileEls.forEach(function(el) {
-            //         sortedLinks.push(el.getAttribute('href'));
-            //     });
-            //
-            //     window.slides.sort(function(a, b) {
-            //         let idxA, idxB;
-            //         idxA = sortedLinks.indexOf(a.src);
-            //         idxB = sortedLinks.indexOf(b.src);
-            //
-            //         if (idxA < idxB) {
-            //             return -1;
-            //         }
-            //
-            //         if (idxA > idxB) {
-            //             return 1;
-            //         }
-            //
-            //         return 0;
-            //     });
+            for (let i = 0; i < sortedSlides.length; i++) {
+                let el = fileListContainer.querySelector('a[href="' + sortedSlides[i].src + '"]').closest('li');
+                fileListContainer.insertBefore(el, null);
+            }
 
-                return sortedSlides;
-            // }
+            return sortedSlides;
         }
 
         sortFilesBtn.addEventListener('click', function () {
-
-            // sortByFormat(sortSelector.value === '' ? sortCustomInput.value : sortSelector.value);
-            let sortedSlides = sortByFormat(sortCustomInput.value, window.slides);
-
-            // window.slides = sortedSlides;
-
-            console.log('Sorted values', sortedSlides);
-            // alert('sorting');
-            // console.log('Selected value', sortSelector.value);
-            //
-            // sortCustomInput.hidden = '' !== sortSelector.value;
+            window.slides = sortByFormat(sortCustomInput.value, window.slides, !!sortReverseInput.checked);
         });
 
         new VisitsTracker(window.currentPath);
