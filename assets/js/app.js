@@ -262,8 +262,6 @@
                     });
                 }
 
-
-
                 // Initializes and opens PhotoSwipe
                 let gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, window.slides, options);
 
@@ -320,6 +318,99 @@
         // themeBtn.addEventListener('click', function () {
         //     themeListEl.classList.toggle('hidden');
         // });
+
+        let sortFilesBtn = document.getElementById('apply_sort_btn');
+        let sortSelector = document.getElementById('sort_pattern_sel');
+        let sortCustomInput = document.getElementById('sort_custom');
+        let sortToggleLegendBtn = document.getElementById('toggle_sort_legend_btn');
+        let legendBlock = document.getElementById('legend');
+
+        sortToggleLegendBtn.addEventListener('click', function () {
+            legendBlock.hidden = !legendBlock.hidden;
+        });
+
+        sortSelector.addEventListener('change', function () {
+            sortCustomInput.hidden = '' !== sortSelector.value;
+        });
+
+        let sortMasks = ['{num}', '{string}', '{num2}', '{string2}', '{blob}'];
+
+        function getSortValues(value, format) {
+            let foundMasks;
+            foundMasks = new Map();
+
+            let maskPriority;
+            maskPriority = new Map();
+
+            sortMasks.forEach(function (mask) {
+                let formatIdx = format.indexOf(mask);
+                if (formatIdx != -1) {
+                    maskPriority.set(mask, formatIdx);
+
+
+                }
+            });
+
+
+
+            // sortMasks.sort(function(a, b) {
+            //     if (a.)
+            // });
+
+            return foundMasks;
+        }
+
+        /**
+         *
+         * @param format {string}
+         * @param currentSlides {Array}
+         * @returns {*[]}
+         */
+        function sortByFormat(format, currentSlides) {
+            let sortedSlides = [];
+
+            // currentSlides.forEach(function (item) {
+            //
+            // });
+            // let sortedFileEls;
+            // sortedFileEls = document.querySelectorAll('#files_list a');
+            //
+            // if (sortedFileEls !== null && sortedFileEls.length > 0) {
+            //     let sortedLinks = [];
+            //     sortedFileEls.forEach(function(el) {
+            //         sortedLinks.push(el.getAttribute('href'));
+            //     });
+            //
+            //     window.slides.sort(function(a, b) {
+            //         let idxA, idxB;
+            //         idxA = sortedLinks.indexOf(a.src);
+            //         idxB = sortedLinks.indexOf(b.src);
+            //
+            //         if (idxA < idxB) {
+            //             return -1;
+            //         }
+            //
+            //         if (idxA > idxB) {
+            //             return 1;
+            //         }
+            //
+            //         return 0;
+            //     });
+
+                return sortedSlides;
+            // }
+        }
+
+        sortFilesBtn.addEventListener('click', function () {
+
+            sortByFormat(sortSelector.value === '' ? sortCustomInput.value : sortSelector.value);
+
+            console.log('Sorted values', window.slides);
+            // alert('sorting');
+            // console.log('Selected value', sortSelector.value);
+            //
+            // sortCustomInput.hidden = '' !== sortSelector.value;
+        });
 
         new VisitsTracker(window.currentPath);
     });
