@@ -84,6 +84,21 @@
         <button class="visits-btn" id="toggle_visits_tracking_btn">Visits</button>
     </div>
 
+    {% if prevLink or nextLink %}
+    <div class="btn-group">
+        {% if prevLink %}
+        <a class="nav-btn" href="{{ path('site', {'path': prevLink }) }}">Prev</a>
+        {% else %}
+        <div class="filler"></div>
+        {% endif %}
+        {% if nextLink %}
+        <a class="nav-btn" href="{{ path('site', {'path': nextLink }) }}">Next</a>
+        {% else %}
+            <div class="filler"></div>
+        {% endif %}
+    </div>
+    {% endif %}
+
     {% if files | length > 0 %}
     <div id="files_list" class="hidden">
         <h2>Files in folder</h2>

@@ -26,6 +26,11 @@
     color: $btn-primary-font-color-hover;
   }
 
+  .nav-btn, .nav-btn:active, .nav-btn:hover, .nav-btn:visited {
+    color: $btn-default-font-color;
+    background-color: $btn-primary-background-color;
+  }
+
   button.del-btn {
     color: $btn-alert-font-color;
     background-color: $btn-alert-background-color;

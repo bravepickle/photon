@@ -24,6 +24,12 @@
 
   button.app-btn:hover {
     color: $btn-primary-font-color-hover;
+    background-color: $btn-primary-background-color;
+  }
+
+  .nav-btn, .nav-btn:active, .nav-btn:hover, .nav-btn:visited {
+    color: $btn-default-font-color;
+    background-color: $btn-secondary-background-color;
   }
 
   button.del-btn {

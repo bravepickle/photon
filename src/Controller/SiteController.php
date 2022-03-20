@@ -38,7 +38,7 @@ class SiteController extends AbstractController
             throw new BadRequestHttpException('Unknown theme was selected: ' . $name);
         }
 
-        $response = $this->redirectToRoute('site', ['path' => $request->query->getAlpha('url')]);
+        $response = $this->redirectToRoute('site', ['path' => $request->query->get('url')]);
         $response->headers->setCookie(Cookie::create(self::COOKIE_THEME_NAME, $name, '+3 months'));
 
         return $response;
@@ -72,81 +72,13 @@ class SiteController extends AbstractController
 
         $depth = $request->query->getInt('depth', 1);
 
-        $finder = new Finder();
-
-        $directories = [];
-        $files = [];
-        $slides = [];
-        $skipped = [];
-
-        if (is_dir($baseDir)) {
-            $directoryObjs = $finder->in($baseDir)->sortByName()->directories()->depth('< 2');
-            /** @var SplFileInfo $directoryObj */
-            foreach ($directoryObjs as $directoryObj) {
-                $link = $linkBase . '/' . $directoryObj->getRelativePathname();
-//                $directories[$link] = $pubFolder . '/' . $directoryObj->getRelativePathname();
-                $directories[$link] = $directoryObj->getRelativePathname();
-            }
-
-            if ($depth > 0) {
-                $finder->depth('< ' . $depth);
-            }
-
-            $fileObjs = $finder->in($baseDir)->sortByName()->files();
-
-            /** @var SplFileInfo $fileObj */
-            foreach ($fileObjs as $fileObj) {
-                $src = $pubFolder . '/' . $fileObj->getRelativePathname();
-                $ext = mb_strtolower($fileObj->getExtension());
-
-                switch ($ext) {
-                    case 'jpeg':
-                    case 'gif':
-                    case 'bmp':
-                    case 'ico':
-                    case 'png':
-                    case 'jpg':
-                        $size = getimagesize($fileObj->getPathname());
-
-                        $slides[$src] = [
-                            'src' => $src,
-                            'w' => $size[0],
-                            'h' => $size[1],
-                            'title' => $fileObj->getFilename(),
-                        ];
-
-                        $files[$src] = $fileObj->getRelativePathname();
-                        break;
-                    default:
-                        $skipped[$src] = $fileObj->getRelativePathname();
-                }
-            }
-        }
-
-        ksort($slides);
-        asort($files);
-        asort($skipped);
+        [$directories, $files, $slides, $skipped] = $this->initFilesData($baseDir, $linkBase, $depth, $pubFolder);
 
         $breadcrumbs = $this->buildBreadcrumbs($pubFolder);
 
-        $theme = $request->cookies->get(self::COOKIE_THEME_NAME, self::DARK_THEME);
+        [$theme, $themeIconsMap, $themeLabelsMap] = $this->initThemeData($request);
 
-        $themeIconsMap = [
-            self::DARK_THEME => 'fas fa-moon',
-            self::LIGHT_THEME => 'fas fa-sun',
-            self::MONOCHROME_DARK_THEME => 'fas fa-adjust',
-        ];
-
-        $themeLabelsMap = [
-            self::DARK_THEME => 'Dark',
-            self::LIGHT_THEME => 'Light',
-            self::MONOCHROME_DARK_THEME => 'Monochrome',
-        ];
-
-        if (!isset($themeLabelsMap[$theme])) { // unknown theme
-            $theme = self::DARK_THEME;
-            $request->cookies->remove(self::COOKIE_THEME_NAME);
-        }
+        [$prevLink, $nextLink] = $this->initPrevNextLinks($baseDir, $linkBase);
 
         return $this->render('site/index.html.twig', [
             'path' => $path,
@@ -160,7 +92,50 @@ class SiteController extends AbstractController
             'themeLabel' => $themeLabelsMap[$theme],
             'themeIcon' => $themeIconsMap[$theme],
             'deletable' => $path !== '',
+            'prevLink' => $prevLink,
+            'nextLink' => $nextLink,
         ]);
+    }
+
+    protected function initPrevNextLinks(string $currentPath, string $urlPath): array
+    {
+        if (!$urlPath || strpos($urlPath, '/') === false) {
+            return [null, null]; // cannot get siblings for root and first level folders
+        }
+
+        $prevLink = null;
+        $nextLink = null;
+
+        $pos = strrpos($urlPath, '/');
+        $currentFolder = mb_substr($urlPath, $pos + 1);
+        $basePath = mb_substr($urlPath, 0, $pos);
+
+        $finder = new Finder();
+
+        $fileObjs = $finder->in(dirname($currentPath))->sortByName()->directories()->depth('< 1');
+
+        $found = false;
+        foreach ($fileObjs as $fileObj) {
+            if ($found) {
+                $nextLink = $basePath . '/' . $fileObj->getRelativePathname();
+
+                break;
+            }
+
+            if ($fileObj->getRelativePathname() === $currentFolder) {
+                $found = true;
+
+                continue;
+            }
+
+            $prevLink = $basePath . '/' . $fileObj->getRelativePathname();
+        }
+
+        if (!$found) {
+            return [null, null];
+        }
+
+        return [trim($prevLink, '/'), trim($nextLink, '/')];
     }
 
     /**
@@ -225,6 +200,114 @@ class SiteController extends AbstractController
         }
 
         return $this->redirectToRoute('site', ['path' => $redirectPath]);
+    }
+
+    /**
+     * @param Request $request
+     * @return array
+     */
+    public function initThemeData(Request $request): array
+    {
+        $theme = $request->cookies->get(self::COOKIE_THEME_NAME, self::DARK_THEME);
+
+        $themeIconsMap = [
+            self::DARK_THEME => 'fas fa-moon',
+            self::LIGHT_THEME => 'fas fa-sun',
+            self::MONOCHROME_DARK_THEME => 'fas fa-adjust',
+        ];
+
+        $themeLabelsMap = [
+            self::DARK_THEME => 'Dark',
+            self::LIGHT_THEME => 'Light',
+            self::MONOCHROME_DARK_THEME => 'Monochrome',
+        ];
+
+        if (!isset($themeLabelsMap[$theme])) { // unknown theme
+            $theme = self::DARK_THEME;
+            $request->cookies->remove(self::COOKIE_THEME_NAME);
+        }
+        return [$theme, $themeIconsMap, $themeLabelsMap];
+    }
+
+    /**
+     * @param Finder $finder
+     * @param string $baseDir
+     * @param string $pubFolder
+     * @param array $slides
+     * @param array $files
+     * @param array $skipped
+     * @return array
+     */
+    public function initSlidesData(Finder $finder, string $baseDir, string $pubFolder, array $slides, array $files, array $skipped): array
+    {
+        $fileObjs = $finder->in($baseDir)->sortByName()->files();
+
+        /** @var SplFileInfo $fileObj */
+        foreach ($fileObjs as $fileObj) {
+            $src = $pubFolder . '/' . $fileObj->getRelativePathname();
+            $ext = mb_strtolower($fileObj->getExtension());
+
+            switch ($ext) {
+                case 'jpeg':
+                case 'gif':
+                case 'bmp':
+                case 'ico':
+                case 'png':
+                case 'jpg':
+                    $size = getimagesize($fileObj->getPathname());
+
+                    $slides[$src] = [
+                        'src' => $src,
+                        'w' => $size[0],
+                        'h' => $size[1],
+                        'title' => $fileObj->getFilename(),
+                    ];
+
+                    $files[$src] = $fileObj->getRelativePathname();
+                    break;
+                default:
+                    $skipped[$src] = $fileObj->getRelativePathname();
+            }
+        }
+
+        return [$slides, $files, $skipped];
+    }
+
+    /**
+     * @param string $baseDir
+     * @param string $linkBase
+     * @param int $depth
+     * @param string $pubFolder
+     * @return array
+     */
+    public function initFilesData(string $baseDir, string $linkBase, int $depth, string $pubFolder): array
+    {
+        $finder = new Finder();
+
+        $directories = [];
+        $files = [];
+        $slides = [];
+        $skipped = [];
+
+        if (is_dir($baseDir)) {
+            $directoryObjs = $finder->in($baseDir)->sortByName()->directories()
+                ->depth(($depth > 0 ? '< ' . $depth : '>= 1'));
+
+            /** @var SplFileInfo $directoryObj */
+            foreach ($directoryObjs as $directoryObj) {
+                $link = $linkBase . '/' . $directoryObj->getRelativePathname();
+                $directories[$link] = $directoryObj->getRelativePathname();
+            }
+
+            [$slides, $files, $skipped] =
+                $this->initSlidesData($finder, $baseDir, $pubFolder, $slides, $files, $skipped);
+        }
+
+        ksort($slides);
+        asort($files);
+        asort($skipped);
+
+        return [$directories, $files, $slides, $skipped];
     }
 
 }

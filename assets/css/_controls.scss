@@ -3,7 +3,7 @@
 
 .content {
   ///*** Basic ***/
-  button {
+  button, .nav-btn, .filler {
     border-radius: $btn-default-border-radius;
     border-width: $btn-default-border-width;
     padding: $btn-default-padding;
@@ -20,6 +20,20 @@
     padding: 1.2rem;
     width: 20rem;
     margin: 1.5rem;
+  }
+
+  .btn-group .filler {
+    width: 20rem;
+    margin: 1.5rem;
+    padding: 1.2rem;
+  }
+
+  .nav-btn {
+    padding: 1.2rem;
+    width: 20rem;
+    margin: 1.5rem;
+    text-align: center;
+    vertical-align: middle;
   }
 
   .btn-group {

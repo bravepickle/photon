@@ -151,7 +151,7 @@
     let fileEls;
     let fileListContainer = document.querySelector('#files_list .items_list');
 
-    fileEls = fileListContainer.querySelectorAll('li');
+    fileEls = fileListContainer === null ? [] : fileListContainer.querySelectorAll('li');
 
     if (fileEls !== null && fileEls.length > 0) {
         fileEls.forEach(function (listEl) {
