@@ -322,34 +322,74 @@
         let sortFilesBtn = document.getElementById('apply_sort_btn');
         let sortSelector = document.getElementById('sort_pattern_sel');
         let sortCustomInput = document.getElementById('sort_custom');
-        let sortToggleLegendBtn = document.getElementById('toggle_sort_legend_btn');
-        let legendBlock = document.getElementById('legend');
+        // let sortRegexFlags = document.getElementById('sort_regex_flags');
+        // let sortToggleLegendBtn = document.getElementById('toggle_sort_legend_btn');
+        // let legendBlock = document.getElementById('legend');
 
-        sortToggleLegendBtn.addEventListener('click', function () {
-            legendBlock.hidden = !legendBlock.hidden;
-        });
+        sortCustomInput.value = sortSelector.value;
+
+        // sortToggleLegendBtn.addEventListener('click', function () {
+        //     legendBlock.hidden = !legendBlock.hidden;
+        // });
 
         sortSelector.addEventListener('change', function () {
-            sortCustomInput.hidden = '' !== sortSelector.value;
+            // sortCustomInput.hidden = '' !== sortSelector.value;
+            sortCustomInput.value = sortSelector.value;
         });
 
-        let sortMasks = ['{num}', '{string}', '{num2}', '{string2}', '{blob}'];
+        // let sortMasks = ['{num}', '{string}', '{num2}', '{string2}', '{blob}'];
+        let sortGroups = ['num', 'string', 'num2', 'string2', 'blob', 'ext'];
 
         function getSortValues(value, format) {
             let foundMasks;
             foundMasks = new Map();
 
-            let maskPriority;
-            maskPriority = new Map();
+            let maskPriority = new Map();
 
-            sortMasks.forEach(function (mask) {
-                let formatIdx = format.indexOf(mask);
-                if (formatIdx != -1) {
-                    maskPriority.set(mask, formatIdx);
+            // let regExp = new RegExp(format, sortRegexFlags.value);
+            let regExp = new RegExp(format);
+            let matched = regExp.exec(value);
 
+            console.info('--- Values', format, value, matched);
 
+            let values = [];
+
+            if (matched.groups) {
+                if (typeof matched.groups.num !== 'undefined') {
+                    values.push(parseInt(matched.groups.num));
                 }
-            });
+
+                if (typeof matched.groups.alpha !== 'undefined') {
+                    values.push(matched.groups.alpha);
+                }
+
+                if (typeof matched.groups.num2 !== 'undefined') {
+                    values.push(parseInt(matched.groups.num2));
+                }
+
+                if (typeof matched.groups.alpha2 !== 'undefined') {
+                    values.push(matched.groups.alpha2);
+                }
+
+                if (typeof matched.groups.ext !== 'undefined') {
+                    values.push(matched.groups.ext);
+                }
+            } else {
+                console.log('Failed to find any regex groups for', value, matched);
+
+                for (let i = 0; i < matched.length; i++) {
+                    values.push(matched[i]);
+                }
+            }
+
+            // sortMasks.forEach(function (mask) {
+            //     let formatIdx = format.indexOf(mask);
+            //     if (formatIdx != -1) {
+            //         maskPriority.set(mask, formatIdx);
+            //
+            //
+            //     }
+            // });
 
 
 
@@ -357,7 +397,10 @@
             //     if (a.)
             // });
 
-            return foundMasks;
+            console.info('Parsed values', values);
+
+            return values;
+            // return foundMasks;
         }
 
         /**
@@ -367,7 +410,46 @@
          * @returns {*[]}
          */
         function sortByFormat(format, currentSlides) {
-            let sortedSlides = [];
+            // let sortedSlides = [];
+
+            let sortedSlides = currentSlides.sort(function (a, b) {
+                let aWeight = getSortValues(a.title, format);
+                let bWeight = getSortValues(b.title, format);
+
+                console.log('sort values', aWeight, bWeight);
+
+                if (aWeight.length >= bWeight.length) {
+                    for (let i = 0; i < aWeight.length; i++) {
+                        if (typeof bWeight[i] === 'undefined') {
+                            return 1;
+                        }
+
+                        if (aWeight[i] > bWeight[i]) {
+                            return 1;
+                        }
+
+                        if (aWeight[i] < bWeight[i]) {
+                            return -1;
+                        }
+                    }
+                } else {
+                    for (let i = 0; i < bWeight.length; i++) {
+                        if (typeof aWeight[i] === 'undefined') {
+                            return 1;
+                        }
+
+                        if (aWeight[i] > bWeight[i]) {
+                            return 1;
+                        }
+
+                        if (aWeight[i] < bWeight[i]) {
+                            return -1;
+                        }
+                    }
+                }
+
+                return 0;
+            });
 
             // currentSlides.forEach(function (item) {
             //
@@ -403,9 +485,12 @@
 
         sortFilesBtn.addEventListener('click', function () {
 
-            sortByFormat(sortSelector.value === '' ? sortCustomInput.value : sortSelector.value);
+            // sortByFormat(sortSelector.value === '' ? sortCustomInput.value : sortSelector.value);
+            let sortedSlides = sortByFormat(sortCustomInput.value, window.slides);
 
-            console.log('Sorted values', window.slides);
+            // window.slides = sortedSlides;
+
+            console.log('Sorted values', sortedSlides);
             // alert('sorting');
             // console.log('Selected value', sortSelector.value);
             //
