@@ -99,20 +99,20 @@ class SiteController extends AbstractController
 
     protected function initPrevNextLinks(string $currentPath, string $urlPath): array
     {
-        if (!$urlPath || strpos($urlPath, '/') === false) {
+        $pos = mb_strrpos($urlPath, '/');
+        if (!$urlPath || $pos === false) {
             return [null, null]; // cannot get siblings for root and first level folders
         }
 
         $prevLink = null;
         $nextLink = null;
 
-        $pos = strrpos($urlPath, '/');
         $currentFolder = mb_substr($urlPath, $pos + 1);
         $basePath = mb_substr($urlPath, 0, $pos);
 
         $finder = new Finder();
 
-        $fileObjs = $finder->in(dirname($currentPath))->sortByName()->directories()->depth('< 1');
+        $fileObjs = $finder->in(dirname($currentPath))->sortByName()->directories()->depth('== 0');
 
         $found = false;
         foreach ($fileObjs as $fileObj) {
