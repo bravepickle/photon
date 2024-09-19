@@ -13,6 +13,7 @@ symfony run app:storage:link $sourcepath2 --target srcPath2
 ...
 symfony run server:start
 ```
+4. (optional) If FrankenPHP, Caddy is installed you can try using it: `frankenphp run` 
 
 ## Requirements
 1. NodeJS v12
